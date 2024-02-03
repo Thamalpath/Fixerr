@@ -1,0 +1,22 @@
+/* Default styles for smaller screens */
+.icon-box img {
+  max-width: 20%;
+  height: auto;
+}
+
+/* Styles for larger screens */
+@media only screen and (min-width: 480px) {
+  .icon-box img {
+    max-width: 12%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .icon-box img {
+    max-width: 15%;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .icon-box img {
+    max-width: 20%;
+  }
+}

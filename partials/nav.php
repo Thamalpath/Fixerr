@@ -1,0 +1,101 @@
+<!-- Header area start -->
+<header>
+         <div id="header-sticky" class="header-area header-style-two">
+            <div class="large-container">
+               <div class="mega-menu-wrapper">
+                  <div class="header-main">
+                     <div class="header-left">
+                        <div class="header-logo">
+                           <a href="index.php">
+                              <img src="assets/imgs/logo/logo.png"
+                                 alt="header logo" style="width: 70%;">
+                           </a>
+                        </div>
+                     </div>
+                     <div class="header-right d-flex justify-content-end">
+                        <div class="mean__menu-wrapper d-none d-lg-block">
+                           <div class="main-menu">
+                              <nav id="mobile-menu">
+                                 <ul>
+                                    <li class="has-dropdown active">
+                                       <a href="index.php">Home</a>
+                                    </li>
+                                    <li>
+                                       <a href="about.html">About</a>
+                                    </li>
+                                    <li>
+                                       <a href="services.html">Services</a>
+                                       <ul class="submenu">
+                                          <li><a href="services.php">Services</a></li>
+                                          <li><a href="service-details.html">Service
+                                                Details</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="has-dropdown">
+                                       <a href="blog-grid.html">Pages</a>
+                                       <ul class="submenu">
+                                          <li class="has-dropdown"><a
+                                                href="projects.html">Projects</a>
+                                             <ul class="submenu">
+                                                <li><a href="projects.html">Projects</a></li>
+                                                <li><a
+                                                      href="project-details.html">Projects
+                                                      Details</a></li>
+                                             </ul>
+                                          </li>
+                                          <li><a href="team.html">Team</a></li>
+                                          <li><a href="team-details.html">Team
+                                                Details</a></li>
+                                          <li><a href="faq.html">Faq's</a></li>
+                                          <li><a href="error.html">Error Page</a></li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <a href="contact.html">Contact</a>
+                                    </li>
+                                    <li>
+                                       <a href="admin/index.php">Admin</a>
+                                    </li>
+
+                                 </ul>
+                              </nav>
+                              <!-- for wp -->
+                              <div class="header__hamburger ml-50 d-none">
+                                 <button type="button"
+                                    class="hamburger-btn offcanvas-open-btn">
+                                    <span>01</span>
+                                    <span>01</span>
+                                    <span>01</span>
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="search-toggle-open header-search my-auto">
+                           <div class="search-icon">
+                              <i class="icon-search"></i>
+                           </div>
+                        </div>
+                        <div class="header-action d-none d-xl-inline-flex gap-5">
+                           <div class="header-link">
+                              <a class="primary-btn-1 btn-hover"
+                                 href="signin.php">
+                                 SIGN IN &nbsp; | <i
+                                    class="icon-right-arrow"></i>
+                                 <span style="top: 147.172px; left: 108.5px;"></span>
+                              </a>
+                           </div>
+                        </div>
+                        <div class="header__hamburger d-xl-none my-auto">
+                           <div class="sidebar__toggle">
+                              <a class="bar-icon" href="javascript:void(0)">
+                                 <i class="fa-light fa-bars-sort"></i>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- Header area end -->
