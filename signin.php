@@ -45,13 +45,13 @@
                <div class="contact-page-form">
                     <form class="account-form" method="post">
                         <div class="row mb-10-none">
-                            <div class="col-xl-12 form-group">
-                                <label class="icon"><i class="las la-envelope"></i></label>
-                                <input type="email" class="form--control" name="email" placeholder="Email" required>
+                           <div class="col-lg-12">
+                                <label>Email</label>
+                                <input type="email" placeholder="Email" name="email" required>
                             </div>
-                            <div class="col-xl-12 form-group">
-                                <label class="icon"><i class="icon-Create_Password_icone"></i></label>
-                                <input type="password" class="form--control" name="password" placeholder="Password" required>
+                            <div class="col-lg-12">
+                                <label>Password</label>
+                                <input type="password" placeholder="Password" name="password" required>
                             </div>
                             <div class="col-lg-12 form-group text-center mt-10">
                                 <button  type="submit" class="primary-btn-1 btn-hover w-100">
