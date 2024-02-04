@@ -5,9 +5,24 @@
 session_start();
 include '../config/dbcon.php';
 
+// Fetch categories from the database
+$category_query = "SELECT `id`, `cat_name` FROM `category` WHERE `status` = 1";
+$category_result = mysqli_query($con, $category_query);
+
+// Array to store category options
+$category_options = array();
+
+if (mysqli_num_rows($category_result) > 0) {
+    while ($row = mysqli_fetch_assoc($category_result)) {
+        // Store category options in the array
+        $category_options[$row['id']] = $row['cat_name'];
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cat_name = $_POST['cat_name'];
+    $sub_cat_name = $_POST['sub_cat_name'];
     $status = $_POST['status'];
+    $category_id = $_POST['category_id'];
     
     // Convert status to 1 for "available" and 0 for "unavailable"
     $status_value = ($status == "available") ? 1 : 0;
@@ -17,22 +32,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image_tmp = $_FILES['image']['tmp_name']; 
     
     // Perform validation
-    if (!empty($cat_name) && !empty($status) && !empty($image)) {
+    if (!empty($sub_cat_name) && !empty($status) && !empty($image)) {
         // Check if the uploaded file is an image
         $imageFileType = strtolower(pathinfo($image, PATHINFO_EXTENSION));
         if ($imageFileType != "jpg" && $imageFileType != "jpeg") {
             $_SESSION['error'] = "Only JPG, JPEG files are allowed.";
         } else {
             // Move the uploaded image to the desired directory
-            $upload_path = "uploads/category/" . $image;
+            $upload_path = "uploads/sub_category/" . $image;
             if (move_uploaded_file($image_tmp, $upload_path)) {
                 // Insert data into database
-                $query = "INSERT INTO category (cat_name, image, status) VALUES ('$cat_name', '$upload_path', '$status_value')";
+                $query = "INSERT INTO sub_category (sub_cat_name, image, status, category_id) 
+                          VALUES ('$sub_cat_name', '$upload_path', '$status_value', '$category_id')";
                 $result = mysqli_query($con, $query);
                 if ($result) {
-                    $_SESSION['success'] = "Category added successfully.";
+                    $_SESSION['success'] = "Sub-category added successfully.";
                 } else {
-                    $_SESSION['error'] = "Failed to add category. Please try again.";
+                    $_SESSION['error'] = "Failed to add sub-category. Please try again.";
                 }
             } else {
                 $_SESSION['error'] = "Failed to upload image. Please try again.";
@@ -65,12 +81,12 @@ mysqli_close($con);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Categories</h1>
+            <h1>Add Sub Category</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-              <li class="breadcrumb-item active">Categories</li>
+              <li class="breadcrumb-item active">Sub Categories</li>
             </ol>
           </div>
         </div>
@@ -85,19 +101,33 @@ mysqli_close($con);
             <div class="card card-primary m-3">
               <!-- /.card-header -->
               <div class="card-header">
-                <h3 class="card-title">Add Category</h3>
+                <h3 class="card-title">Add Sub Category</h3>
               </div>
 
               <form method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
-                                <label for="cat_name">Category Name</label>
-                                <input type="text" class="form-control" id="cat_name" name="cat_name">
+                                <label for="sub_cat_name">Sub Category Name</label>
+                                <input type="text" class="form-control" id="sub_cat_name" name="sub_cat_name">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="category_id">Category</label>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option value="">Select Category</option>
+                                    <?php
+                                    // Populate category options
+                                    foreach ($category_options as $id => $name) {
+                                        echo "<option value=\"$id\">$name</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control">
@@ -108,17 +138,17 @@ mysqli_close($con);
                         </div>
                     </div>
                     <div class="row">
-                      <div class="col-12">
-                          <div class="form-group">
-                              <label for="image">Image <span style="color:red;">(370x247px)</span>
-                              </label>
-                              <input class="form-control" type="file" id="image" name="image"
-                                  onchange="previewImage()">
-                              <img id="preview" src="" alt="Image Preview" style="max-width: 100%;
-                                  margin-top: 10px; display: none;">
-                          </div>
-                      </div>
-                  </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="image">Image <span style="color:red;">(370x247px)</span>
+                                </label>
+                                <input class="form-control" type="file" id="image" name="image"
+                                    onchange="previewImage()">
+                                <img id="preview" src="" alt="Image Preview" style="max-width: 100%;
+                                    margin-top: 10px; display: none;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer mt-5">
                     <button type="submit" class="btn btn-primary">Submit</button>

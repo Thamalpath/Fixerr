@@ -6,40 +6,83 @@ session_start();
 include '../config/dbcon.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $cat_name = $_POST['cat_name'];
-    $status = $_POST['status'];
-    
-    // Convert status to 1 for "available" and 0 for "unavailable"
-    $status_value = ($status == "available") ? 1 : 0;
-    
-    // Image handling
-    $image = $_FILES['image']['name']; 
-    $image_tmp = $_FILES['image']['tmp_name']; 
-    
-    // Perform validation
-    if (!empty($cat_name) && !empty($status) && !empty($image)) {
-        // Check if the uploaded file is an image
-        $imageFileType = strtolower(pathinfo($image, PATHINFO_EXTENSION));
-        if ($imageFileType != "jpg" && $imageFileType != "jpeg") {
-            $_SESSION['error'] = "Only JPG, JPEG files are allowed.";
-        } else {
-            // Move the uploaded image to the desired directory
-            $upload_path = "uploads/category/" . $image;
-            if (move_uploaded_file($image_tmp, $upload_path)) {
-                // Insert data into database
-                $query = "INSERT INTO category (cat_name, image, status) VALUES ('$cat_name', '$upload_path', '$status_value')";
-                $result = mysqli_query($con, $query);
-                if ($result) {
-                    $_SESSION['success'] = "Category added successfully.";
-                } else {
-                    $_SESSION['error'] = "Failed to add category. Please try again.";
-                }
-            } else {
-                $_SESSION['error'] = "Failed to upload image. Please try again.";
-            }
+    // Retrieve form data
+    $category_id = $_GET['id']; // Assuming you are passing category id via URL
+    $cat_name = mysqli_real_escape_string($con, $_POST['cat_name']);
+    $status = isset($_POST['status']) ? ($_POST['status'] == 'available' ? 1 : 0) : 0;
+
+    // Handle image upload if necessary
+    if ($_FILES['image']['name']) {
+        // Delete previous image
+        $sql_select_image = "SELECT image FROM category WHERE id='$category_id'";
+        $result_select_image = mysqli_query($con, $sql_select_image);
+        $row_select_image = mysqli_fetch_assoc($result_select_image);
+        $old_image_path = $row_select_image['image'];
+        if ($old_image_path && file_exists($old_image_path)) {
+            unlink($old_image_path);
         }
+
+        // Upload new image
+        $target_dir = "uploads/category/";
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $newImageName = uniqid() . '.' . $imageFileType;
+        $newFilePath = $target_dir . $newImageName;
+
+        // Check file size
+        if ($_FILES["image"]["size"] > 5000000) {
+            $_SESSION['error'] = "Sorry, your file is too large.";
+            header("Location: category-edit.php?id=$category_id");
+            exit();
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif") {
+            $_SESSION['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            header("Location: category-edit.php?id=$category_id");
+            exit();
+        }
+
+        // Upload file
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $newFilePath)) {
+            $_SESSION['error'] = "Sorry, there was an error uploading your file.";
+            header("Location: category-edit.php?id=$category_id");
+            exit();
+        }
+
+        // Update category data in the database with the new image path
+        $sql = "UPDATE category SET cat_name='$cat_name', status='$status', image='$newFilePath' WHERE id='$category_id'";
     } else {
-        $_SESSION['error'] = "All fields are required.";
+        // Update category data in the database without updating the image path
+        $sql = "UPDATE category SET cat_name='$cat_name', status='$status' WHERE id='$category_id'";
+    }
+
+    $result = mysqli_query($con, $sql);
+
+    if ($result) {
+        $_SESSION['success'] = "Category updated successfully";
+        header("Location: category.php");
+        exit();
+    } else {
+        $_SESSION['error'] = "Error updating category: " . mysqli_error($con);
+        header("Location: category-edit.php?id=$category_id");
+        exit();
+    }
+}
+
+// Fetch category data for editing
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
+    $category_id = $_GET['id'];
+    $sql = "SELECT * FROM category WHERE id = $category_id";
+    $result = mysqli_query($con, $sql);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+    } else {
+        $_SESSION['error'] = "Error: " . mysqli_error($con);
+        header("Location: category.php");
+        exit();
     }
 }
 
@@ -65,12 +108,13 @@ mysqli_close($con);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Categories</h1>
+            <h1>Edit Category</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-              <li class="breadcrumb-item active">Categories</li>
+              <li class="breadcrumb-item"><a href="category.php">Categories</a></li>
+              <li class="breadcrumb-item active">Edit Category</li>
             </ol>
           </div>
         </div>
@@ -85,7 +129,7 @@ mysqli_close($con);
             <div class="card card-primary m-3">
               <!-- /.card-header -->
               <div class="card-header">
-                <h3 class="card-title">Add Category</h3>
+                <h3 class="card-title">Edit Category</h3>
               </div>
 
               <form method="post" enctype="multipart/form-data">
@@ -94,15 +138,15 @@ mysqli_close($con);
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="cat_name">Category Name</label>
-                                <input type="text" class="form-control" id="cat_name" name="cat_name">
+                                <input type="text" class="form-control" id="cat_name" name="cat_name" value="<?php echo $row['cat_name']; ?>">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control">
-                                  <option value="available">Available</option>
-                                  <option value="unavailable">Unavailable</option>
+                                  <option value="available" <?php if ($row['status'] == 1) echo 'selected'; ?>>Available</option>
+                                  <option value="unavailable" <?php if ($row['status'] == 0) echo 'selected'; ?>>Unavailable</option>
                               </select>
                             </div>
                         </div>
@@ -114,14 +158,14 @@ mysqli_close($con);
                               </label>
                               <input class="form-control" type="file" id="image" name="image"
                                   onchange="previewImage()">
-                              <img id="preview" src="" alt="Image Preview" style="max-width: 100%;
-                                  margin-top: 10px; display: none;">
+                              <img id="preview" src="<?php echo $row['image']; ?>" alt="Image Preview" style="max-width: 100%;
+                                  margin-top: 10px;">
                           </div>
                       </div>
                   </div>
                 </div>
                 <div class="card-footer mt-5">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
 

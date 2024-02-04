@@ -51,7 +51,7 @@ mysqli_close($con);
                 <table id="DataTable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>St ID</th>
+                    <th>Cat ID</th>
                     <th>Category Name</th>
                     <th>Image</th>
                     <th>Status</th>
@@ -65,9 +65,9 @@ mysqli_close($con);
                       echo "<tr>";
                       echo "<td>{$row['id']}</td>";
                       echo "<td>{$row['cat_name']}</td>";
-                      echo "<td>{$row['image']}</td>";
+                      echo "<td><img src='{$row['image']}' style='max-width: 100px; max-height: 100px;' alt='Category Image'></td>";
                       echo "<td>{$row['status']}</td>";
-                      echo "<td></td>";
+                      echo "<td class='text-center'><a href='category-edit.php?id={$row['id']}' class='btn btn-primary w-75'>Edit</a></td>"; 
                       echo "</tr>";
                   }
                   ?>

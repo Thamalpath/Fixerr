@@ -3,8 +3,10 @@ session_start();
 
 include '../config/dbcon.php';
 
-// Fetch sub_category data from the database
-$sql = "SELECT * FROM sub_category";
+// Fetch sub_category data from the database with category name
+$sql = "SELECT sub.*, cat.cat_name 
+        FROM sub_category AS sub
+        LEFT JOIN category AS cat ON sub.category_id = cat.id";
 $result = mysqli_query($con, $sql);
 
 mysqli_close($con);
@@ -63,14 +65,14 @@ mysqli_close($con);
                   <?php
                   // Loop through the fetched data and display it in the table
                   while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<tr>";
-                      echo "<td>{$row['id']}</td>";
-                      echo "<td>{$row['sub_cat_name']}</td>";
-                      echo "<td></td>";
-                      echo "<td>{$row['image']}</td>";
-                      echo "<td>{$row['status']}</td>";
-                      echo "<td></td>";
-                      echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>{$row['id']}</td>";
+                    echo "<td>{$row['sub_cat_name']}</td>";
+                    echo "<td>{$row['cat_name']}</td>"; 
+                    echo "<td><img src='{$row['image']}' style='max-width: 100px; max-height: 100px;' alt='Sub Category Image'></td>";
+                    echo "<td>{$row['status']}</td>";
+                    echo "<td class='text-center'><a href='sub-category-edit.php?id={$row['id']}' class='btn btn-primary w-75'>Edit</a></td>"; 
+                    echo "</tr>";
                   }
                   ?>
                   </tbody>
