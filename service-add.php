@@ -54,7 +54,7 @@ mysqli_close($con);
                <div class="contact-page-form">
                     <form method="post" id="staffForm" class="account-form">
                         <div class="row mb-10-none mt-20">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <label>Profession Name</label>
                                 <input type="text" placeholder="Profession Name" name="profession_name" required>
                             </div>
