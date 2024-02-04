@@ -46,8 +46,6 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <!-- <script src="dist/js/pages/dashboard.js"></script> -->
 
-    <!-- Dropzone -->
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <!-- TinyMCE -->
     <script src="https://cdn.jsdelivr.net/npm/tinymce@6.4.2/tinymce.min.js"></script>
 
