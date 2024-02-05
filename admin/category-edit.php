@@ -37,9 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Allow certain file formats
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif") {
-            $_SESSION['error'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        if ($imageFileType != "jpg" && $imageFileType != "jpeg") {
+            $_SESSION['error'] = "Sorry, only JPG, JPEG files are allowed.";
             header("Location: category-edit.php?id=$category_id");
             exit();
         }
@@ -61,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($con, $sql);
 
     if ($result) {
-        $_SESSION['success'] = "Category updated successfully";
         header("Location: category.php");
         exit();
     } else {
