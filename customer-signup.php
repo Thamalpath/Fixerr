@@ -1,3 +1,53 @@
+<?php
+session_start(); 
+include 'config/dbcon.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $fname = mysqli_real_escape_string($con,$_POST["fname"]);
+    $lname = mysqli_real_escape_string($con,$_POST["lname"]);
+    $phone = mysqli_real_escape_string($con,$_POST["phone"]);
+    $addressNO = mysqli_real_escape_string($con,$_POST["add_no"]);
+    $address1 = mysqli_real_escape_string($con,$_POST["address1"]);
+    $address2 = mysqli_real_escape_string($con,$_POST["address2"]);
+    $city = mysqli_real_escape_string($con,$_POST["city"]);
+    $zipcode = mysqli_real_escape_string($con,$_POST["zipcode"]);
+    $country = mysqli_real_escape_string($con,$_POST["country"]);
+    $email = mysqli_real_escape_string($con,$_POST["email"]);
+    $password = mysqli_real_escape_string($con,$_POST["password"]);
+
+    // Check if email is already registered
+    $checkEmailQuery = "SELECT * FROM customer WHERE email='$email'";
+    $result = mysqli_query($con, $checkEmailQuery);
+
+    if ($result) {
+        // Check the number of rows only if the query was successful
+        if (mysqli_num_rows($result) > 0) {
+            // Email already exists
+            $_SESSION['error'] = "Email is already registered. Please use a different email.";
+        } else {
+            // Hash the password for security
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insert data into the 'customer' table
+            $insertQuery = "INSERT INTO customer (fname, lname, phone, add_no, address1, address2, city, zipcode, country, email, password) 
+                            VALUES ('$fname', '$lname', '$phone', '$addressNO', '$address1', '$address2', '$city', '$zipcode', '$country', '$email', '$hashedPassword')";
+
+            if (mysqli_query($con, $insertQuery)) {
+                // Sign up successful
+                $_SESSION['success'] = "Sign up successfully!";
+            } else {
+                // Sign up failed
+                $_SESSION['error'] = "Error signing up. Please try again.";
+            }
+        }
+    }
+}
+
+// Close the database connection
+mysqli_close($con);
+?>
+
 <?php include('partials/header.php'); ?>
 
 <style>
@@ -21,7 +71,8 @@
                   <nav>
                      <ul>
                         <li><span><a href="index.php">Home</a></span></li>
-                        <li><span>Sign Up</span></li>
+                        <li><span><a href="signup.php">Sign Up</a></span></li>
+                        <li><span>Customer</span></li>
                      </ul>
                   </nav>
                </div>
@@ -43,7 +94,7 @@
                   <h3 class="section-title mt-10">Sign Up as a Customer</h3>
                </div>
                <div class="contact-page-form">
-                    <form method="post" id="staffForm" class="account-form">
+                    <form method="post" id="customerForm" class="account-form">
                         <div class="row mb-10-none mt-20">
                             <div class="col-lg-6">
                                 <label>First Name</label>
@@ -71,7 +122,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label>City</label>
-                                <input type="text" placeholder="City" name="City" required>
+                                <input type="text" placeholder="city" name="city" required>
                             </div>
                             <div class="col-lg-4">
                                 <label>Zip Code</label>
