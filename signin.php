@@ -1,3 +1,53 @@
+<?php
+session_start();
+include 'config/dbcon.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   $email = mysqli_real_escape_string($con, $_POST["email"]);
+   $password = mysqli_real_escape_string($con, $_POST["password"]);
+
+   // Check if the user is a customer
+   $customerQuery = "SELECT * FROM customer WHERE email='$email'";
+   $customerResult = mysqli_query($con, $customerQuery);
+
+   // Check if the user is a professional
+   $professionalQuery = "SELECT * FROM professional WHERE email='$email'";
+   $professionalResult = mysqli_query($con, $professionalQuery);
+
+   if ($customerResult && mysqli_num_rows($customerResult) > 0) {
+       // User is a customer
+       $user = mysqli_fetch_assoc($customerResult);
+       if ($password === $user['password']) { // Compare passwords directly
+           // Password is correct, redirect to customer account page
+           $_SESSION['success'] = "Login successful!";
+           header("Location: customer-account.php");
+           exit();
+       } else {
+           // Incorrect password for customer
+           $_SESSION['error'] = "Invalid password.";
+       }
+   } elseif ($professionalResult && mysqli_num_rows($professionalResult) > 0) {
+       // User is a professional
+       $user = mysqli_fetch_assoc($professionalResult);
+       if ($password === $user['password']) { // Compare passwords directly
+           // Password is correct, redirect to professional account page
+           $_SESSION['success'] = "Login successful!";
+           header("Location: account.php");
+           exit();
+       } else {
+           // Incorrect password for professional
+           $_SESSION['error'] = "Invalid password.";
+       }
+   } else {
+       // User not found
+       $_SESSION['error'] = "User not found. Please check your email.";
+   }
+}
+
+mysqli_close($con);
+?>
+
+
 <?php include('partials/header.php'); ?>
 
 <style>
