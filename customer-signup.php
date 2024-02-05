@@ -26,12 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Email already exists
             $_SESSION['error'] = "Email is already registered. Please use a different email.";
         } else {
-            // Hash the password for security
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert data into the 'customer' table
             $insertQuery = "INSERT INTO customer (fname, lname, phone, add_no, address1, address2, city, zipcode, country, email, password) 
-                            VALUES ('$fname', '$lname', '$phone', '$addressNO', '$address1', '$address2', '$city', '$zipcode', '$country', '$email', '$hashedPassword')";
+                            VALUES ('$fname', '$lname', '$phone', '$addressNO', '$address1', '$address2', '$city', '$zipcode', '$country', '$email', '$password')";
 
             if (mysqli_query($con, $insertQuery)) {
                 // Sign up successful

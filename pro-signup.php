@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = "Email is already registered. Please use a different email.";
         } else {
             // Hash the password for security
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert data into the 'Staff' table
             $insertQuery = "INSERT INTO professional (fname, lname, phone, add_no, address1, address2, city, zipcode, country, profession, email, password) 
-            VALUES ('$fname', '$lname', '$phone', '$addressNO', '$address1', '$address2', '$city', '$zipcode', '$country', '$profession', '$email', '$hashedPassword')";
+            VALUES ('$fname', '$lname', '$phone', '$addressNO', '$address1', '$address2', '$city', '$zipcode', '$country', '$profession', '$email', '$password')";
 
 
             if (mysqli_query($con, $insertQuery)) {
