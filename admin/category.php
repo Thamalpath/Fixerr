@@ -66,7 +66,15 @@ mysqli_close($con);
                       echo "<td>{$row['id']}</td>";
                       echo "<td>{$row['cat_name']}</td>";
                       echo "<td><img src='{$row['image']}' style='max-width: 100px; max-height: 100px;' alt='Category Image'></td>";
-                      echo "<td>{$row['status']}</td>";
+                      echo "<td>";
+                        if ($row['status'] == 1) {
+                            echo "Available";
+                        } elseif ($row['status'] == 0) {
+                            echo "Unavailable";
+                        } else {
+                            echo "Unknown";
+                        }
+                      echo "</td>";
                       echo "<td class='text-center'><a href='category-edit.php?id={$row['id']}' class='btn btn-primary w-75'>Edit</a></td>"; 
                       echo "</tr>";
                   }

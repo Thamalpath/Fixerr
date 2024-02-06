@@ -53,7 +53,7 @@ mysqli_close($con);
                 <table id="DataTable" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>St ID</th>
+                    <th>Sub-Cat ID</th>
                     <th>Sub Category Name</th>
                     <th>Category</th>
                     <th>Image</th>
@@ -70,7 +70,15 @@ mysqli_close($con);
                     echo "<td>{$row['sub_cat_name']}</td>";
                     echo "<td>{$row['cat_name']}</td>"; 
                     echo "<td><img src='{$row['image']}' style='max-width: 100px; max-height: 100px;' alt='Sub Category Image'></td>";
-                    echo "<td>{$row['status']}</td>";
+                    echo "<td>";
+                        if ($row['status'] == 1) {
+                            echo "Available";
+                        } elseif ($row['status'] == 0) {
+                            echo "Unavailable";
+                        } else {
+                            echo "Unknown";
+                        }
+                    echo "</td>";
                     echo "<td class='text-center'><a href='sub-category-edit.php?id={$row['id']}' class='btn btn-primary w-75'>Edit</a></td>"; 
                     echo "</tr>";
                   }
