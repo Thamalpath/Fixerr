@@ -1,52 +1,43 @@
 <?php
-session_start();
+session_start(); 
+
 include 'config/dbcon.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $email = mysqli_real_escape_string($con, $_POST["email"]);
-   $password = mysqli_real_escape_string($con, $_POST["password"]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-   // Check if the user is a customer
-   $customerQuery = "SELECT * FROM customer WHERE email='$email'";
-   $customerResult = mysqli_query($con, $customerQuery);
+    // Check if the user is a customer or Driver
+    $query = "SELECT * FROM customer WHERE email='$email' AND password='$password'";
+    $result = mysqli_query($con, $query);
 
-   // Check if the user is a professional
-   $professionalQuery = "SELECT * FROM professional WHERE email='$email'";
-   $professionalResult = mysqli_query($con, $professionalQuery);
+    if(mysqli_num_rows($result) > 0) {
+        // User is a Staff member
+        $user = mysqli_fetch_assoc($result);
+        $_SESSION['user_type'] = 'customer';
+        $_SESSION['user_data'] = $user; // Store user data in session
+        header("Location: account.php");
+        exit();
+    }
 
-   if ($customerResult && mysqli_num_rows($customerResult) > 0) {
-       // User is a customer
-       $user = mysqli_fetch_assoc($customerResult);
-       if ($password === $user['password']) { // Compare passwords directly
-           // Password is correct, redirect to customer account page
-           $_SESSION['success'] = "Login successful!";
-           header("Location: customer-account.php");
-           exit();
-       } else {
-           // Incorrect password for customer
-           $_SESSION['error'] = "Invalid password.";
-       }
-   } elseif ($professionalResult && mysqli_num_rows($professionalResult) > 0) {
-       // User is a professional
-       $user = mysqli_fetch_assoc($professionalResult);
-       if ($password === $user['password']) { // Compare passwords directly
-           // Password is correct, redirect to professional account page
-           $_SESSION['success'] = "Login successful!";
-           header("Location: account.php");
-           exit();
-       } else {
-           // Incorrect password for professional
-           $_SESSION['error'] = "Invalid password.";
-       }
-   } else {
-       // User not found
-       $_SESSION['error'] = "User not found. Please check your email.";
-   }
+    $query = "SELECT * FROM professional WHERE email='$email' AND password='$password'";
+    $result = mysqli_query($con, $query);
+
+    if(mysqli_num_rows($result) > 0) {
+        // User is a professional 
+        $user = mysqli_fetch_assoc($result);
+        $_SESSION['user_type'] = 'professional';
+        $_SESSION['user_data'] = $user; // Store user data in session
+        header("Location: account.php");
+        exit();
+    }
+
+    // Invalid credentials
+    $_SESSION['error'] = "Invalid username or password";
+    header("Location: signin.php");
+    exit();
 }
-
-mysqli_close($con);
 ?>
-
 
 <?php include('partials/header.php'); ?>
 
