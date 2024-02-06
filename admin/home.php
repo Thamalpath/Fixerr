@@ -1,3 +1,14 @@
+<?php
+session_start(); 
+
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['user_data']) || $_SESSION['user_data']['user_type'] !== 'admin') {
+  // Redirect to the login page or display an error message
+  header("Location: index.php"); // Adjust the login page URL accordingly
+  exit();
+}
+?>
+
 <?php include('partials/header.php'); ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
