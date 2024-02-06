@@ -70,7 +70,7 @@ if (!$result) {
                       echo "<td>{$row['id']}</td>";
                       echo "<td>{$row['fname']} {$row['lname']}</td>";
                       echo "<td>{$row['phone']}</td>";
-                      echo "<td>{$row['addno']} , {$row['address1']} , {$row['address2']} , {$row['zipcode']} , {$row['city']} , {$row['country']}</td>";
+                      echo "<td>{$row['add_no']} , {$row['address1']} , {$row['address2']} , {$row['zipcode']} , {$row['city']} , {$row['country']}</td>";
                       echo "<td>{$row['profession']}</td>";
                       echo "<td>{$row['email']}</td>";
                       echo "</tr>";
