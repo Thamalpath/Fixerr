@@ -3,13 +3,6 @@ session_start();
 
 include '../config/dbcon.php';
 
-// Check if the user is logged in and is an admin
-if (!isset($_SESSION['user_data']) || $_SESSION['user_data']['user_type'] !== 'admin') {
-  // Redirect to the login page or display an error message
-  header("Location: index.php"); // Adjust the login page URL accordingly
-  exit();
-}
-
 // Fetch professional data from the database
 $sql = "SELECT * FROM professional";
 $result = mysqli_query($con, $sql);

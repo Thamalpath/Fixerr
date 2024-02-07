@@ -5,13 +5,6 @@
 session_start();
 include '../config/dbcon.php';
 
-// Check if the user is logged in and is an admin
-if (!isset($_SESSION['user_data']) || $_SESSION['user_data']['user_type'] !== 'admin') {
-  // Redirect to the login page or display an error message
-  header("Location: index.php"); // Adjust the login page URL accordingly
-  exit();
-}
-
 // Fetch categories from the database
 $category_query = "SELECT `id`, `cat_name` FROM `category` WHERE `status` = 1";
 $category_result = mysqli_query($con, $category_query);
