@@ -113,14 +113,6 @@
 
       <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/js/fontawesome.min.js"></script>
 
-      <!-- TinyMCE -->
-      <script src="https://cdn.jsdelivr.net/npm/tinymce@6.4.2/tinymce.min.js"></script>
-      <script>
-      tinymce.init({
-            selector: '#description'
-      });
-      </script>
-
       <!-- Add this script to initialize Notyf.js -->
       <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
       <script>
