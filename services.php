@@ -33,7 +33,6 @@ $result = mysqli_query($con, $query);
                     <nav>
                         <ul>
                             <li><span><a href="index.php">Home</a></span></li>
-                            <li><span><a href="category.php">Categories</a></span></li>
                             <li><span>Services</span></li>
                         </ul>
                     </nav>
