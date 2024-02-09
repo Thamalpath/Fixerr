@@ -1,8 +1,21 @@
 <?php
+
 session_start();
 include 'config/dbcon.php';
 
-include('partials/header.php'); ?>
+// Get category ID from URL parameter
+$category_id = $_GET['category_id']; 
+
+// Retrieve subcategories for the given category
+$query = "SELECT `id`, `sub_cat_name`, `image`, `status`, `category_id` 
+          FROM `sub_category` 
+          WHERE `category_id` = $category_id AND `status` = 1";
+
+$result = mysqli_query($con, $query);
+
+?>
+
+<?php include('partials/header.php'); ?>
 
 <main>
    
@@ -36,18 +49,17 @@ include('partials/header.php'); ?>
         <div class="small-container">
             <div class="row g-4">
                 <?php
-                    // Check if category ID is provided
-                    if(isset($_GET['category_id'])) {
-                        $category_id = $_GET['category_id'];
-
-                        // Retrieve subcategories related to the clicked category
-                        $query = "SELECT `id`, `sub_cat_name`, `image`, `icon`, `status` FROM `sub_category` WHERE `category_id` = $category_id";
-                        $result = mysqli_query($con, $query);
+                    // Check if query execution is successful 
+                    if($result){
 
                         // Check if any subcategories are available
-                        if(mysqli_num_rows($result) > 0) {
-                            // Output each subcategory
-                            while($row = mysqli_fetch_assoc($result)) {
+                        if(mysqli_num_rows($result) > 0){
+                        
+                        // Output each subcategory
+                        while($row = mysqli_fetch_assoc($result)){
+                        
+                            // Check if 'id' key exists
+                            if(array_key_exists('id', $row)){
                                 echo '<div class="col-xxl-4 col-xl-4 col-lg-4 mb-15">';
                                 echo '<div class="project-slider-area p-relative">';
                                 echo '<figure class="image m-img">';
@@ -55,24 +67,27 @@ include('partials/header.php'); ?>
                                 echo '</figure>';
                                 echo '<div class="content-area">';
                                 echo '<div class="title-area">';
-                                echo '<h6 class="mb-5">Sub Category of </h6>';
-                                echo '<h5><a href="subcategory-details.php?id=' . $row['id'] . '">' . $row['sub_cat_name'] . '</a></h5>'; 
-                                echo '</div>';
-                                echo '<div class="icon-area">';
-                                echo '<a href="subcategory-details.php?id=' . $row['id'] . '"><i class="icon-arrow-up"></i></a>';
+                                echo '<h5><a href="services.php?id=' . $row['id'] . '">' . $row['sub_cat_name'] . '</a></h5>'; 
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
-                            }
-                        } else {
-                            echo "No subcategories available for this category.";
-                        }
+                            } else {
+                                echo "Subcategory ID not available.";
+                             }
+                             
+                          }
+                          
+                       } else {
+                          echo "No subcategories available for this category.";
+                       }
+                       
                     } else {
-                        echo "Category ID is not provided.";
+                       echo "Failed to retrieve subcategories from database.";
                     }
-
+                    
                     mysqli_close($con);
+                    
                 ?>
             </div>
         </div>
