@@ -96,7 +96,11 @@
                                              <a href="account.php">Account</a>
                                           </li>
                                           <li>
-                                             <a href="service-add.php">services</a>
+                                             <a>Services</a>
+                                             <ul class="submenu">
+                                                <li><a href="service-add.php">Add-Service</a></li>
+                                                <li><a href="pro-services.php">Services</a></li>
+                                             </ul>
                                           </li>
                                           <li class="has-dropdown active">
                                              <a>Welcome <?= $_SESSION['user_data']['fname']?></a>
@@ -173,12 +177,7 @@
                                     <a href="about.html">About</a>
                                  </li>
                                  <li>
-                                    <a href="services.html">Services</a>
-                                    <ul class="submenu">
-                                       <li><a href="services.php">Services</a></li>
-                                       <li><a href="service-details.html">Service
-                                             Details</a></li>
-                                    </ul>
+                                    <a href="category.php">Category</a>
                                  </li>
                                  <li class="has-dropdown">
                                     <a href="blog-grid.html">Pages</a>

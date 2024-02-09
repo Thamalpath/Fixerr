@@ -75,6 +75,14 @@
                   <p>Customer</p>
               </a>
           </li>
+          <br>
+          <!-- Service Option -->
+          <li class="nav-item">
+              <a href="./service.php" class="nav-link">
+                  <i class="nav-icon fas fa-tools"></i>
+                  <p>Service</p>
+              </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
