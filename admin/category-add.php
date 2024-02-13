@@ -113,8 +113,8 @@ mysqli_close($con);
                               <label for="image">Image</label>
                               <input class="form-control" type="file" id="image" name="image"
                                   onchange="previewImage()">
-                              <img id="preview" src="" alt="Image Preview" style="max-width: 100%;
-                                  margin-top: 10px; display: none;">
+                              <img id="preview" src="" alt="Image Preview" style="width: 400px; height: auto;
+                                  margin-top: 30px; display: none;">
                           </div>
                       </div>
                   </div>
