@@ -32,14 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: service-edit.php?id={$service_id}"); // Redirect to form page with the service ID
             exit();
         }
-
-        // Perform validation for image resolution
-        list($width, $height) = getimagesize($image_tmp);
-        if ($width != 370 || $height != 247) {
-            $_SESSION['error'] = "Image resolution must be 370x247 pixels.";
-            header("Location: service-edit.php?id={$service_id}"); // Redirect to form page with the service ID
-            exit();
-        }
         
         // Move the uploaded image to the desired directory
         $upload_path = "uploads/service/" . $image;
@@ -151,7 +143,7 @@ $result_subcategories = mysqli_query($con, $query_subcategories);
                                 <textarea name="description" id="description" placeholder="Description" required><?php echo $row_service['description']; ?></textarea>
                             </div>
                             <div class="col-lg-12 mb-40">
-                                <label>Image<span style="color:red;"> (370x247px)</span></label>
+                                <label>Image</label>
                                 <input class="form-control" type="file" id="image" name="image" onchange="previewImage()">
                                 <img id="imagePreview" src="<?php echo $row_service['image']; ?>" alt="Current Image Preview" style="max-width: 100%; height: auto;">
                             </div>

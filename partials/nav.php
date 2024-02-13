@@ -25,6 +25,12 @@
                                           <li>
                                              <a href="account.php">Account</a>
                                           </li>
+                                          <li>
+                                             <a href="inbox.php">Inbox</a>
+                                          </li>
+                                          <li>
+                                             <a href="category.php">Category</a>
+                                          </li>
                                           <li class="has-dropdown active">
                                              <a>Welcome <?= $_SESSION['user_data']['fname']?></a>
                                           </li>
@@ -94,6 +100,9 @@
                                        <ul>
                                           <li>
                                              <a href="account.php">Account</a>
+                                          </li>
+                                          <li>
+                                             <a href="inbox.php">Inbox</a>
                                           </li>
                                           <li>
                                              <a>Services</a>
@@ -174,32 +183,10 @@
                                     <a href="index.php">Home</a>
                                  </li>
                                  <li>
-                                    <a href="about.html">About</a>
+                                    <a href="#about">About</a>
                                  </li>
                                  <li>
                                     <a href="category.php">Category</a>
-                                 </li>
-                                 <li class="has-dropdown">
-                                    <a href="blog-grid.html">Pages</a>
-                                    <ul class="submenu">
-                                       <li class="has-dropdown"><a
-                                             href="projects.html">Projects</a>
-                                          <ul class="submenu">
-                                             <li><a href="projects.html">Projects</a></li>
-                                             <li><a
-                                                   href="project-details.html">Projects
-                                                   Details</a></li>
-                                          </ul>
-                                       </li>
-                                       <li><a href="team.html">Team</a></li>
-                                       <li><a href="team-details.html">Team
-                                             Details</a></li>
-                                       <li><a href="faq.html">Faq's</a></li>
-                                       <li><a href="error.html">Error Page</a></li>
-                                    </ul>
-                                 </li>
-                                 <li>
-                                    <a href="contact.html">Contact</a>
                                  </li>
                                  <li>
                                     <a href="admin/index.php">Admin</a>

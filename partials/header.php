@@ -72,11 +72,6 @@
                            <button type="submit"><i class="icon-search"></i></button>
                         </div>
                         <div class="df-search-category">
-                           <span>Search by : </span>
-                           <a href="#">Modified Roofing , </a>
-                           <a href="#">Roof Installation, </a>
-                           <a href="#">Roof Cornering, </a>
-                           <a href="#">Roof Renovation </a>
                         </div>
                      </form>
                   </div>

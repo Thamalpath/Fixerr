@@ -32,7 +32,7 @@ $result = mysqli_query($con, $query);
                 <div class="breadcrumb__menu">
                     <nav>
                         <ul>
-                            <li><span><a href="index.php">Home</a></span></li>
+                            <li><span><a href="category.php">Category</a></span></li>
                             <li><span>Services</span></li>
                         </ul>
                     </nav>

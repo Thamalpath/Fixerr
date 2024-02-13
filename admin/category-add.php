@@ -110,8 +110,7 @@ mysqli_close($con);
                     <div class="row">
                       <div class="col-12">
                           <div class="form-group">
-                              <label for="image">Image <span style="color:red;">(370x247px)</span>
-                              </label>
+                              <label for="image">Image</label>
                               <input class="form-control" type="file" id="image" name="image"
                                   onchange="previewImage()">
                               <img id="preview" src="" alt="Image Preview" style="max-width: 100%;

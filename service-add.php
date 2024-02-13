@@ -37,14 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: service-add.php"); // Redirect to form page
         exit();
     }
-
-    // Perform validation for image resolution
-    list($width, $height) = getimagesize($image_tmp);
-    if ($width != 370 || $height != 247) {
-        $_SESSION['error'] = "Image resolution must be 370x247 pixels.";
-        header("Location: service-add.php"); // Redirect to form page
-        exit();
-    }
     
     // Move the uploaded image to the desired directory
     $upload_path = "uploads/service/" . $image;
@@ -120,7 +112,7 @@ mysqli_close($con);
                                 <textarea name="description" id="description" placeholder="Description" required spellcheck="true"></textarea>
                             </div>
                             <div class="col-lg-12 mb-40">
-                                <label>Image<span style="color:red;"> (370x247px)</span></label>
+                                <label>Image</label>
                                 <input class="form-control" type="file" id="image" name="image" required onchange="previewImage()">
                                 <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;">
                             </div>

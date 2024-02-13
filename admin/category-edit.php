@@ -29,13 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newImageName = uniqid() . '.' . $imageFileType;
         $newFilePath = $target_dir . $newImageName;
 
-        // Check file size
-        if ($_FILES["image"]["size"] > 5000000) {
-            $_SESSION['error'] = "Sorry, your file is too large.";
-            header("Location: category-edit.php?id=$category_id");
-            exit();
-        }
-
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "jpeg") {
             $_SESSION['error'] = "Sorry, only JPG, JPEG files are allowed.";

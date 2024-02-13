@@ -18,7 +18,7 @@
                               <h1 class="banner-title">We Focus on Customer Satisfaction Every Time</h1>
                               <div class="banner-btn-area-2">
                                  <a class="primary-btn-1 btn-hover"
-                                    href="services.html">
+                                    href="category.php">
                                     VIEW SERVICES &nbsp; | <i
                                        class="icon-right-arrow"></i>
                                     <span style="top: 147.172px; left: 108.5px;"></span>
@@ -63,7 +63,7 @@
                               <h1 class="banner-title">We Have the Best Solution for Every Household Problems</h1>
                               <div class="banner-btn-area-2">
                                  <a class="primary-btn-1 btn-hover"
-                                    href="services.html">
+                                    href="category.php">
                                     VIEW SERVICES &nbsp; | <i
                                        class="icon-right-arrow"></i>
                                     <span style="top: 147.172px; left: 108.5px;"></span>
@@ -108,7 +108,7 @@
                               <h1 class="banner-title">Explore the Our Greatest Services by Categorized</h1>
                               <div class="banner-btn-area-2">
                                  <a class="primary-btn-1 btn-hover"
-                                    href="services.html">
+                                    href="category.php">
                                     VIEW SERVICES &nbsp; | <i
                                        class="icon-right-arrow"></i>
                                     <span style="top: 147.172px; left: 108.5px;"></span>
@@ -213,7 +213,7 @@
          <!-- Features area end -->
 
          <!-- about two area start -->
-         <section class="about-2-section p-relative fix section-space">
+         <section class="about-2-section p-relative fix section-space" id="about">
             <div class="bg-shape-1"
                data-background="assets/imgs/shapes/shape-30.png"></div>
             <div class="bg-shape-2"
@@ -256,226 +256,18 @@
                               </ul>
                            </div>
                         </div>
-                        <div class="about-2-btn-area">
+                        <!-- <div class="about-2-btn-area">
                            <a class="primary-btn-1 btn-hover" href="about.html">
                               about us &nbsp; | <i class="icon-right-arrow"></i>
                               <span style="top: 147.172px; left: 108.5px;"></span>
                            </a>
-                        </div>
+                        </div> -->
                      </div>
                   </div>
                </div>
             </div>
          </section>
          <!-- about two area end -->
-
-         <!-- Service tab area start -->
-         <section
-            class="service-tab-section section-space bg-color-1 p-relative">
-            <div class="bg-image"
-               data-background="assets/imgs/shapes/shape-35.png"></div>
-            <div class="bg-shape-1"
-               data-background="assets/imgs/shapes/shape-33.png"></div>
-            <div class="bg-shape-2"
-               data-background="assets/imgs/shapes/shape-34.png"></div>
-            <div class="small-container">
-               <div class="service-tab-title-area mb-70">
-                  <div class="title-box wow fadeInLeft" data-wow-delay=".5s">
-                     <span class="section-sub-title">WHAT WE DO</span>
-                     <h3 class="section-title mt-10 text-white p-relative">Explore the Greatest  <br>Our Services</h3>
-                  </div>
-                  <a class="primary-btn-4 btn-hover mt-20" href="services.php">
-                     all services &nbsp; | <i class="icon-right-arrow"></i>
-                     <span style="top: 147.172px; left: 108.5px;"></span>
-                  </a>
-               </div>
-               <div class="row">
-                  <div class="col-xxl-4 col-xl-4 col-lg-4">
-                     <div class="service-tab-btn-area wow fadeInLeft"
-                        data-wow-delay="500ms">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                           <li class="nav-item" role="presentation">
-                              <a href="javascript:void(0)"
-                                 class="nav-link active"
-                                 id="modified-roofing-tab" data-bs-toggle="tab"
-                                 data-bs-target="#modified-roofing-tab-pane"
-                                 role="tab"
-                                 aria-controls="modified-roofing-tab-pane"
-                                 aria-selected="true">
-                                 <div class="icon-box">
-                                    <i class="bi bi-tools"></i>
-                                 </div>
-                                 Appliance Repair
-                              </a>
-                           </li>
-                           <li class="nav-item" role="presentation">
-                              <a href="javascript:void(0)" class="nav-link"
-                                 id="roof-installation-tab" data-bs-toggle="tab"
-                                 data-bs-target="#roof-installation-tab-pane"
-                                 role="tab"
-                                 aria-controls="roof-installation-tab-pane"
-                                 aria-selected="false">
-                                 <div class="icon-box">
-                                    <i class="bi bi-lightning-charge"></i>
-                                 </div>
-                                 Electrician
-                              </a>
-                           </li>
-                           <li class="nav-item" role="presentation">
-                              <a href="javascript:void(0)" class="nav-link"
-                                 id="roof-cornering-tab" data-bs-toggle="tab"
-                                 data-bs-target="#roof-cornering-tab-pane"
-                                 role="tab"
-                                 aria-controls="roof-cornering-tab-pane"
-                                 aria-selected="false">
-                                 <div class="icon-box">
-                                    <i class="bi bi-droplet"></i>
-                                 </div>
-                                 Plumbing
-                              </a>
-                           </li>
-                           <li class="nav-item" role="presentation">
-                              <a href="javascript:void(0)" class="nav-link"
-                                 id="roof-renovation-tab" data-bs-toggle="tab"
-                                 data-bs-target="#roof-renovation-tab-pane"
-                                 role="tab"
-                                 aria-controls="roof-renovation-tab-pane"
-                                 aria-selected="false">
-                                 <div class="icon-box">
-                                    <i class="bi bi-house"></i>
-                                 </div>
-                                 Home Cleaning
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-xxl-8 col-xl-8 col-lg-8">
-                     <div class="service-tab-details-area">
-                        <div class="tab-content" id="myTabContent">
-                           <div class="tab-pane fade show active"
-                              id="modified-roofing-tab-pane" role="tabpanel"
-                              aria-labelledby="modified-roofing-tab"
-                              tabindex="0">
-                              <div class="service-tab-content p-relative">
-                                 <div class="tab-bg-shape"
-                                    data-background="assets/imgs/shapes/shape-32.png"></div>
-                                 <figure class="image p-relative">
-                                    <img
-                                       src="assets/imgs/resources/service-tab-1.jpg"
-                                       alt>
-                                 </figure>
-                                 <div class="content p-relative">
-                                    <h4>Appliance Repair</h4>
-                                    <p class="pt-15 pb-10">Welcome to Fixerr, your trusted partner for all your appliance repair needs. With expert technicians and a commitment to fast, reliable service, we'll have your appliances up and running in no time. </p>
-                                    <ul class="tab-list-content">
-                                       <li>100% Satisfaction Guarantee</li>
-                                       <li>Professional Engineers Provide</li>
-                                    </ul>
-                                    <a class="primary-btn-1 btn-hover mt-20"
-                                       href="services.html">
-                                       Read more &nbsp; | <i
-                                          class="icon-right-arrow"></i>
-                                       <span
-                                          style="top: 147.172px; left: 108.5px;"></span>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="tab-pane fade"
-                              id="roof-installation-tab-pane" role="tabpanel"
-                              aria-labelledby="roof-installation-tab"
-                              tabindex="0">
-                              <div class="service-tab-content p-relative">
-                                 <div class="tab-bg-shape"
-                                    data-background="assets/imgs/shapes/shape-32.png"></div>
-                                 <figure class="image p-relative">
-                                    <img
-                                       src="assets/imgs/resources/service-tab-1.jpg"
-                                       alt>
-                                 </figure>
-                                 <div class="content p-relative">
-                                    <h4>Electrician</h4>
-                                    <p class="pt-15 pb-10">Welcome to Fixerr, where electrical solutions meet reliability. Our expert electricians are dedicated to providing top-notch service for all your electrical needs. </p>
-                                    <ul class="tab-list-content">
-                                       <li>100% Satisfaction Guarantee</li>
-                                       <li>Professional Engineers Provide</li>
-                                    </ul>
-                                    <a class="primary-btn-1 btn-hover mt-20"
-                                       href="services.html">
-                                       Read more &nbsp; | <i
-                                          class="icon-right-arrow"></i>
-                                       <span
-                                          style="top: 147.172px; left: 108.5px;"></span>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="tab-pane fade"
-                              id="roof-cornering-tab-pane" role="tabpanel"
-                              aria-labelledby="roof-cornering-tab"
-                              tabindex="0">
-                              <div class="service-tab-content p-relative">
-                                 <div class="tab-bg-shape"
-                                    data-background="assets/imgs/shapes/shape-32.png"></div>
-                                 <figure class="image p-relative">
-                                    <img
-                                       src="assets/imgs/resources/service-tab-1.jpg"
-                                       alt>
-                                 </figure>
-                                 <div class="content p-relative">
-                                    <h4>Plumbing</h4>
-                                    <p class="pt-15 pb-10">Welcome to Fixerr, your go-to destination for plumbing solutions that flow smoothly. Our skilled plumbers are ready to tackle any plumbing issue, big or small, with efficiency and expertise.</p>
-                                    <ul class="tab-list-content">
-                                       <li>100% Satisfaction Guarantee</li>
-                                       <li>Professional Engineers Provide</li>
-                                    </ul>
-                                    <a class="primary-btn-1 btn-hover mt-20"
-                                       href="services.html">
-                                       Read more &nbsp; | <i
-                                          class="icon-right-arrow"></i>
-                                       <span
-                                          style="top: 147.172px; left: 108.5px;"></span>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="tab-pane fade"
-                              id="roof-renovation-tab-pane" role="tabpanel"
-                              aria-labelledby="roof-renovation-tab"
-                              tabindex="0">
-                              <div class="service-tab-content p-relative">
-                                 <div class="tab-bg-shape"
-                                    data-background="assets/imgs/shapes/shape-32.png"></div>
-                                 <figure class="image p-relative">
-                                    <img
-                                       src="assets/imgs/resources/service-tab-1.jpg"
-                                       alt>
-                                 </figure>
-                                 <div class="content p-relative">
-                                    <h4>Home Cleaning</h4>
-                                    <p class="pt-15 pb-10">Welcome to Fixerr, where cleanliness meets convenience. Our professional home cleaning service is designed to leave your space sparkling from top to bottom. </p>
-                                    <ul class="tab-list-content">
-                                       <li>100% Satisfaction Guarantee</li>
-                                       <li>Professional Engineers Provide</li>
-                                    </ul>
-                                    <a class="primary-btn-1 btn-hover mt-20"
-                                       href="services.html">
-                                       Read more &nbsp; | <i
-                                          class="icon-right-arrow"></i>
-                                       <span
-                                          style="top: 147.172px; left: 108.5px;"></span>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
-         <!-- Service tab area end -->
 
          <!-- Work process area start -->
          <section class="work-process-section section-space p-relative"
@@ -651,100 +443,6 @@
          </section>
          <!-- Text slider area end -->
 
-         <!-- Project slider two area start -->
-         <section
-            class="project-slider-two-section section-space-bottom p-relative fix">
-            <div class="bg-shape"
-               data-background="assets/imgs/shapes/shape-37.png"></div>
-            <div class="small-container">
-               <div class="project-two-title-area mb-60">
-                  <div class="title-box wow fadeInLeft" data-wow-delay=".5s">
-                     <span class="section-sub-title">portfolio</span>
-                     <h3 class="section-title mt-10">Our Latest Projects</h3>
-                  </div>
-                  <a class="primary-btn-1 btn-hover" href="projects.html">
-                     all PROJECTS &nbsp; | <i class="icon-right-arrow"></i>
-                     <span style="top: 147.172px; left: 108.5px;"></span>
-                  </a>
-               </div>
-            </div>
-            <div class="container-fluid">
-               <div class="swiper project-active-1">
-                  <div class="swiper-wrapper">
-                     <!-- block -->
-                     <div class="swiper-slide">
-                        <div class="project-slider-two-box p-relative">
-                           <figure class="image w-img">
-                              <img src="assets/imgs/project/project-5.jpg" alt>
-                           </figure>
-                           <div class="content">
-                              <div class="inner-box">
-                                 <span>roof Design</span>
-                                 <h5><a href="projects.html">Modified Roofing</a></h5>
-                              </div>
-                              <a class="icon-1" href="projects.html">
-                                 <i class="icon-arrow-up"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- block -->
-                     <div class="swiper-slide">
-                        <div class="project-slider-two-box p-relative">
-                           <figure class="image w-img">
-                              <img src="assets/imgs/project/project-6.jpg" alt>
-                           </figure>
-                           <div class="content">
-                              <div class="inner-box">
-                                 <span>roof Design</span>
-                                 <h5><a href="projects.html">Modified Roofing</a></h5>
-                              </div>
-                              <a class="icon-1" href="projects.html">
-                                 <i class="icon-arrow-up"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- block -->
-                     <div class="swiper-slide">
-                        <div class="project-slider-two-box p-relative">
-                           <figure class="image w-img">
-                              <img src="assets/imgs/project/project-7.jpg" alt>
-                           </figure>
-                           <div class="content">
-                              <div class="inner-box">
-                                 <span>roof Design</span>
-                                 <h5><a href="projects.html">Modified Roofing</a></h5>
-                              </div>
-                              <a class="icon-1" href="projects.html">
-                                 <i class="icon-arrow-up"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- block -->
-                     <div class="swiper-slide">
-                        <div class="project-slider-two-box p-relative">
-                           <figure class="image w-img">
-                              <img src="assets/imgs/project/project-8.jpg" alt>
-                           </figure>
-                           <div class="content">
-                              <div class="inner-box">
-                                 <span>roof Design</span>
-                                 <h5><a href="projects.html">Modified Roofing</a></h5>
-                              </div>
-                              <a class="icon-1" href="projects.html">
-                                 <i class="icon-arrow-up"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
-         <!-- Project slider two area end -->
-
          <!-- Testimonials area start -->
          <section class="testimonials-section p-relative section-space fix"
             data-background="assets/imgs/bg/testimonial-bg.png">
@@ -867,5 +565,5 @@
 
       </main>
 
-      <!-- Footer area start -->
-      <?php include('partials/footer.php'); ?>
+<!-- Footer area start -->
+<?php include('partials/footer.php'); ?>

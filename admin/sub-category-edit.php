@@ -29,13 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newImageName = uniqid() . '.' . $imageFileType;
         $newFilePath = $target_dir . $newImageName;
 
-        // Check file size
-        if ($_FILES["image"]["size"] > 5000000) {
-            $_SESSION['error'] = "Sorry, your file is too large.";
-            header("Location: sub-category-edit.php?id=$sub_category_id");
-            exit();
-        }
-
         // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "jpeg") {
             $_SESSION['error'] = "Sorry, only JPG, JPEG files are allowed.";
@@ -176,8 +169,7 @@ mysqli_close($con);
                     <div class="row">
                       <div class="col-12">
                           <div class="form-group">
-                              <label for="image">Image <span style="color:red;">(370x247px)</span>
-                              </label>
+                              <label for="image">Image</label>
                               <input class="form-control" type="file" id="image" name="image"
                                   onchange="previewImage()">
                               <img id="preview" src="<?php echo $row['image']; ?>" alt="Image Preview" style="max-width: 100%;
