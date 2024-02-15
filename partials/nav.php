@@ -47,11 +47,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="search-toggle-open header-search my-auto">
-                                 <div class="search-icon">
-                                    <i class="icon-search"></i>
-                                 </div>
-                              </div>
                               <div class="header-action d-none d-xl-inline-flex gap-5">
                                  <div class="header-link">
                                     <a class="primary-btn-1 btn-hover"
@@ -127,11 +122,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="search-toggle-open header-search my-auto">
-                                 <div class="search-icon">
-                                    <i class="icon-search"></i>
-                                 </div>
-                              </div>
                               <div class="header-action d-none d-xl-inline-flex gap-5">
                                  <div class="header-link">
                                     <a class="primary-btn-1 btn-hover"
@@ -203,11 +193,6 @@
                                  <span>01</span>
                               </button>
                            </div>
-                        </div>
-                     </div>
-                     <div class="search-toggle-open header-search my-auto">
-                        <div class="search-icon">
-                           <i class="icon-search"></i>
                         </div>
                      </div>
                      <div class="header-action d-none d-xl-inline-flex gap-5">

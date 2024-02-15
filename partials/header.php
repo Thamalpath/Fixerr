@@ -59,31 +59,6 @@
       </div>
       <!-- Back to top end -->
 
-      <!-- search area start -->
-      <div class="df-search-area">
-         <div class="container">
-            <div class="row">
-               <div class="col-xl-12">
-                  <div class="df-search-form">
-                     <div class="df-search-close text-center mb-20">
-                        <button class="df-search-close-btn df-search-close-btn"></button>
-                     </div>
-                     <form action="#">
-                        <div class="df-search-input mb-10">
-                           <input type="text" placeholder="Search here...">
-                           <button type="submit"><i class="icon-search"></i></button>
-                        </div>
-                        <div class="df-search-category">
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="body-overlay"></div>
-      <!-- search area end -->
-
       <!-- Offcanvas area start -->
       <div class="fix">
          <div class="offcanvas__info">
