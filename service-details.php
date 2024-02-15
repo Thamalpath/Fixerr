@@ -30,7 +30,9 @@ $serviceResult = mysqli_query($con, $serviceQuery);
 $reviewQuery = "SELECT r.`message`, r.`rate`, r.`datetime`, c.`fname`, c.`lname`
                 FROM `review` r
                 INNER JOIN `customer` c ON r.`customer_id` = c.`id`
-                WHERE r.`service_id` = $service_id";
+                WHERE r.`service_id` = $service_id
+                ORDER BY RAND()
+                LIMIT 8";
 $reviewResult = mysqli_query($con, $reviewQuery);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_POST['rate']) && isset($_POST['service_id'])) {
