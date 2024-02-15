@@ -44,9 +44,48 @@ $result = mysqli_query($con, $query);
     </div>
     <!-- Breadcrumb area end --> 
 
+    <!-- <div class="col-xxl-4 col-xl-4 col-lg-4">
+        <div class="blog-sidebar">
+            <aside>
+                <div class="blog-widget-1 mb-30">
+                    <h5 class="blog-widget-title p-relative mb-45">Search</h5>
+                    <div class="search-form p-relative">
+                    <form action="#">
+                        <input type="text" placeholder="Search here">
+                        <button type="submit"><i class="icon-search"></i></button>
+                    </form>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div> -->
+
     <!-- Service Slider area start --> 
     <section class="project-page-section section-space p-relative fix">
         <div class="small-container">
+            <h5 class="blog-widget-title p-relative mb-45">Search</h5>
+            <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 mb-15">
+                    <div class="blog-widget-1 mb-30">
+                        <div class="search-form p-relative">
+                        <form action="#">
+                            <input type="text" placeholder="Search here">
+                            <button type="submit"><i class="icon-search"></i></button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 mb-15">
+                    <div class="blog-widget-1 mb-30">
+                        <div class="search-form p-relative">
+                        <form action="#">
+                            <input type="text" placeholder="Search here">
+                            <button type="submit"><i class="icon-search"></i></button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row g-4">
                 <?php
                     // Check if query execution is successful 
