@@ -6901,11 +6901,11 @@ blockquote i {
   border-radius: 50%;
 }
 
-.post-box-comments-box {
+/* .post-box-comments-box {
   display: grid;
   grid-template-columns: 100px auto;
   gap: 20px;
-}
+} */
 
 .postbox__comment-name h5 {
   font-size: 20px;

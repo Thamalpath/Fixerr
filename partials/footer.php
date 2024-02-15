@@ -131,6 +131,7 @@ $result = mysqli_query($con, $query);
       <script src="assets/js/main.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/js/fontawesome.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
       <!-- Add this script to initialize Notyf.js -->
       <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

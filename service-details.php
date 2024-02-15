@@ -6,9 +6,11 @@ include 'config/dbcon.php';
 if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'customer') {
     // User is logged in as a customer, show the chat widget
     $showChatWidget = true;
+    $showComment = true;
 } else {
     // User is not logged in as a customer, hide the chat widget
     $showChatWidget = false;
+    $showComment = false;
 }
 
 // Retrieve all categories
@@ -19,12 +21,43 @@ $result1 = mysqli_query($con, $category);
 $service_id = $_GET['id'];
 
 // Retrieve service details for the given service
-$query = "SELECT `id`, `profession_name`, `description`, `image` 
+$serviceQuery = "SELECT `id`, `profession_name`, `description`, `image` 
           FROM `service` 
           WHERE `id` = $service_id AND `status` = 1";
+$serviceResult = mysqli_query($con, $serviceQuery);
 
-$result = mysqli_query($con, $query);
+// Retrieve reviews for the given service
+$reviewQuery = "SELECT r.`message`, r.`rate`, r.`datetime`, c.`fname`, c.`lname`
+                FROM `review` r
+                INNER JOIN `customer` c ON r.`customer_id` = c.`id`
+                WHERE r.`service_id` = $service_id";
+$reviewResult = mysqli_query($con, $reviewQuery);
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_POST['rate']) && isset($_POST['service_id'])) {
+    // Sanitize and validate form data
+    $message = mysqli_real_escape_string($con, $_POST['message']);
+    $rate = floatval($_POST['rate']); // Change this line
+    $service_id = intval($_POST['service_id']);
+    $customer_id = $_SESSION['user_data']['id'];
+    
+    // Insert data into the review table
+    $query = "INSERT INTO `review` (`message`, `rate`, `datetime`, `customer_id`, `service_id`) 
+              VALUES ('$message', '$rate', NOW(), '$customer_id', '$service_id')";
+    
+    $result = mysqli_query($con, $query);
+    
+    if ($result) {
+        // Success alert
+        $_SESSION['success'] = "Your review has been submitted successfully.";
+    } else {
+        // Error alert
+        $_SESSION['error'] = "Failed to submit your review. Please try again.";
+    }
+    
+    // Redirect back to the service details page
+    header("Location: service-details.php?id=$service_id");
+    exit();
+}
 ?>
 
 
@@ -122,13 +155,13 @@ $result = mysqli_query($con, $query);
                     <div class="service-details-page-content">
                         <?php
                             // Check if query execution is successful 
-                            if ($result) {
+                            if ($serviceResult) {
 
                                 // Check if any service details are available
-                                if (mysqli_num_rows($result) > 0) {
+                                if (mysqli_num_rows($serviceResult) > 0) {
 
                                     // Output service details
-                                    $serviceDetails = mysqli_fetch_assoc($result);
+                                    $serviceDetails = mysqli_fetch_assoc($serviceResult);
                                     echo '<figure class="w-img">';
                                     echo '<img src="uploads/service/' . basename($serviceDetails['image']) . '" alt="">';
                                     echo '</figure>';
@@ -145,87 +178,67 @@ $result = mysqli_query($con, $query);
                         ?>
                         <br>
 
-                        <!-- <h4 class="post-box-comments-title">02 Comments</h4>
-
-                        <div class="post-box-comments-box p-relative mt-40 mb-40">
-                            <div class="postbox__comment-avatar">
-                                <img src="assets/imgs/blog/post-box-1.jpg" alt="">
-                            </div>
-                            <div class="postbox__comment-text ">
-                                <div class="postbox__comment-name">                     
-                                    <h5><a href="#">Ralph edwards</a></h5>
-                                    <span class="post-meta"> March 20, 2023 at 2:37 pm</span>
-                                </div>
-                                <ul class="postbox__comment_ratings">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                </ul>
-                                <p class="pt-25 pb-25">Neque porro est qui dolorem ipsum quia quaed inventor veritatis et quasi architecto var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy</p>
-                                <div class="postbox__comment-reply">
-                                    <a href="#">Reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="post-box-comments-box p-relative mt-40 mb-40">
-                            <div class="postbox__comment-avatar">
-                                <img src="assets/imgs/blog/post-box-2.jpg" alt="">
-                            </div>
-                            <div class="postbox__comment-text ">
-                                <div class="postbox__comment-name">                     
-                                    <h5><a href="#">Albert Flores</a></h5>
-                                    <span class="post-meta"> March 20, 2023 at 2:37 pm</span>
-                                </div>
-                                <ul class="postbox__comment_ratings">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                </ul>
-                                <p class="pt-25 pb-25">Neque porro est qui dolorem ipsum quia quaed inventor veritatis et quasi architecto var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy</p>
-                                <div class="postbox__comment-reply">
-                                    <a href="#">Reply</a>
+                        <h4 class="post-box-comments-title">Customer Reviews</h4>
+                        <?php while ($row = mysqli_fetch_assoc($reviewResult)) { ?>
+                            <div class="post-box-comments-box p-relative mt-40 mb-40">
+                                <div class="postbox__comment-text">
+                                    <div class="postbox__comment-name">
+                                        <h5><?php echo $row['fname'] . ' ' . $row['lname']; ?></h5>
+                                        <span class="post-meta"><?php echo $row['datetime']; ?></span>
+                                    </div>
+                                    <ul class="postbox__comment_ratings">
+                                        <?php 
+                                        // Full stars
+                                        for ($i = 0; $i < floor($row['rate']); $i++) { ?>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                        <?php } 
+                                        
+                                        // Half star if applicable
+                                        if ($row['rate'] - floor($row['rate']) >= 0.5) { ?>
+                                            <li><i class="bi bi-star-half"></i></li>
+                                        <?php } ?>
+                                    </ul>
+                                    <p class="pt-25 pb-25"><?php echo $row['message']; ?></p>
+                                    <!-- <div class="postbox__comment-reply">
+                                        <a href="#">Reply</a>
+                                    </div> -->
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="postbox__comment-form mt-60">
-                            <h4 class="postbox__comment-form-title mb-50">Leave a Comment</h4>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                        <div class="postbox__comment-input">
-                                        <label>Your Name*</label>
-                                        <input type="text" placeholder="Your Name*">
+                            <hr>
+                        <?php } ?>
+                        
+                        <?php if($showComment): ?>
+                            <div class="postbox__comment-form mt-60">
+                                <h4 class="postbox__comment-form-title mb-50">Leave a Comment</h4>
+                                <form method="post" action="#">
+                                    <input type="hidden" name="service_id" value="<?php echo $service_id; ?>">
+                                    <div class="row">
+                                        <div class="col-xxl-12">
+                                            <div class="postbox__comment-input">
+                                                <label>Star Rating</label>
+                                                <!-- Include RateYo star rating plugin -->
+                                                <div id="rateYo"></div>
+                                                <input type="hidden" name="rate" id="ratingInput" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-12 mt-40">
+                                            <div class="postbox__comment-input">
+                                                <label>Your Review</label>
+                                                <textarea name="message" placeholder="Write Message" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-12">
+                                            <div class="postbox__comment-btn">
+                                                <button type="submit" class="primary-btn-1 btn-hover">
+                                                    POST comment
+                                                    <span style="top: 147.172px; left: 108.5px;"></span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                                        <div class="postbox__comment-input">
-                                        <label>Your Email*</label>
-                                        <input type="email" placeholder="Your Email*">
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-12">
-                                        <div class="postbox__comment-input">
-                                        <label>Your Review*</label>
-                                        <textarea placeholder="Write Message"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-xxl-12">
-                                        <div class="postbox__comment-btn">
-                                        <button  type="submit" class="primary-btn-1 btn-hover">
-                                            POST comment
-                                            <span style="top: 147.172px; left: 108.5px;"></span>
-                                        </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div> -->
+                                </form>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-xxl-5 col-xl-5 col-lg-5">
@@ -276,6 +289,19 @@ $result = mysqli_query($con, $query);
 
  <!-- Footer area start -->
 <?php include('partials/footer.php'); ?>
+
+<script>
+    $(function () {
+        $("#rateYo").rateYo({
+            starWidth: "30px",
+            rating: 0,
+            onSet: function (rating, rateYoInstance) {
+                $('#ratingInput').val(rating);
+            }
+        });
+    });
+</script>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
