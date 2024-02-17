@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
     /* Styles for chat area and form */
     .chat-area {
         /* display: none;  */
-        border: 1px solid #ea1826;
+        border: 1px solid #102039;
         background-color: #ffffff;
         padding: 20px;
         height: 300px;
@@ -81,11 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
         overflow-y: scroll;
         font-family: "Roboto", sans-serif;
         border-radius: 0 0 5px 5px;
-        scrollbar-color: #ea1826 #ffffff;
+        scrollbar-color: #102039 #ffffff;
     }
 
     .chat-header {
-        background-color: #ea1826;
+        background-color: #102039;
         color: #ffffff;
         padding: 10px;
         font-family: "Roboto", sans-serif;
@@ -102,20 +102,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
 
     .chat-form input[type="text"] {
         width: calc(100% - 100px);
-        border: 1px solid #ea1826;
+        border: 1px solid #102039;
         padding: 5px;
     }
 
     .start-chat-container input {
         margin-top: 20px;
-        border: 1px solid #ea1826;
+        border: 1px solid #102039;
     }
 
     .chat-form button {
         width: 90px;
         height: 60px;
         padding: 5px;
-        background-color: #ea1826;
+        background-color: #102039;
         color: #ffffff;
         border-radius: 5px;
         margin-left: 5px;

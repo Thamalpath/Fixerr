@@ -189,7 +189,7 @@
                                     <a href="category.php">Category</a>
                                  </li>
                                  <li>
-                                    <a href="admin/index.php">Admin</a>
+                                    <a href="contact.php">Contact</a>
                                  </li>
 
                               </ul>

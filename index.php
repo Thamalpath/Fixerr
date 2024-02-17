@@ -344,7 +344,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>APPLIANCE REPAIR</h1>
                   </div>
@@ -353,7 +353,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>ELECTRICIAN</h1>
                   </div>
@@ -362,7 +362,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>PLUMBING</h1>
                   </div>
@@ -371,7 +371,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>HOME CLEANING</h1>
                   </div>
@@ -380,7 +380,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>TAXES</h1>
                   </div>
@@ -389,7 +389,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>BEAUTY AND SPA</h1>
                   </div>
@@ -398,7 +398,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>ONLINE INSTRUCTOR</h1>
                   </div>
@@ -407,7 +407,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>EVENT MANAGEMENT</h1>
                   </div>
@@ -416,7 +416,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>HANDYMAN SERVICES</h1>
                   </div>
@@ -425,7 +425,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>CONCRETE/SLAB REPAIR</h1>
                   </div>
@@ -434,7 +434,7 @@
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                            d="M30 0L38.1027 21.8973L60 30L38.1027 38.1027L30 60L21.8973 38.1027L0 30L21.8973 21.8973L30 0Z"
-                           fill="#EA1826" />
+                           fill="#102039" />
                      </svg>
                      <h1>MOVERS</h1>
                   </div>

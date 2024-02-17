@@ -2,7 +2,7 @@
 
 <style>
 .text-base{
-    color: #ea1826;
+    color: #102039;
 }
 </style>
 

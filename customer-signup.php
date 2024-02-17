@@ -50,7 +50,7 @@ mysqli_close($con);
 
 <style>
 .text-base{
-    color: #ea1826;
+    color: #798dac;
 }
 </style>
 

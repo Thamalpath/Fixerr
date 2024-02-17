@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <style>
 .text-base{
-    color: #ea1826;
+    color: #798dac;
 }
 </style>
 

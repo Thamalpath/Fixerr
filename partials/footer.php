@@ -39,10 +39,10 @@ $result = mysqli_query($con, $query);
                            <h4 class="mb-30 footer-title">Quick Links</h4>
                            <ul class="service-list">
                               <li><a href="index.php">Home</a></li>
-                              <li><a href="#about">About Us</a></li>
                               <li><a href="category.php">Categories</a></li>
                               <li><a href="signin.php">Sign In</a></li>
                               <li><a href="signup.php">Sign Up</a></li>
+                              <li><a href="faq.php">Faq's</a></li>
                            </ul>
                         </div>
                      </div>

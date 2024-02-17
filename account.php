@@ -82,7 +82,7 @@ include 'partials/header.php';
 
 <style>
 .text-base{
-    color: #ea1826;
+    color: #102039;
 }
 </style>
 
@@ -181,8 +181,9 @@ include 'partials/header.php';
                             <?php endif; ?>
                             
                             <div class="col-lg-12 form-group text-center mt-10">
-                                <button type="submit" class="primary-btn-1 btn-hover w-100">
+                                <button  type="submit" class="primary-btn-1 btn-hover w-100">
                                     Update &nbsp; | <i class="icon-right-arrow"></i>
+                                    <span style="top: 147.172px; left: 108.5px;"></span>
                                 </button>
                             </div>
                         </div>

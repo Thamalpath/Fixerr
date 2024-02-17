@@ -58,7 +58,7 @@ mysqli_close($con);
     .chat-area {
         margin-top: 20px;
         display: block;
-        border: 1px solid #ea1826;
+        border: 1px solid #102039;
         background-color: #ffffff;
         padding: 20px;
         height: 450px; /* Set a fixed height */
@@ -69,7 +69,7 @@ mysqli_close($con);
     }
 
     .chat-header {
-        background-color: #ea1826;
+        background-color: #102039;
         color: #ffffff;
         padding: 10px;
         font-family: "Roboto", sans-serif;
@@ -85,7 +85,7 @@ mysqli_close($con);
 
     .chat-form input[type="text"] {
         width: calc(100% - 120px);
-        border: 1px solid #ea1826;
+        border: 1px solid #102039;
         padding: 5px;
     }
 
@@ -93,7 +93,7 @@ mysqli_close($con);
         width: 110px;
         height: 60px;
         padding: 5px;
-        background-color: #ea1826;
+        background-color: #102039;
         color: #ffffff;
         border-radius: 5px;
         margin-left: 5px;

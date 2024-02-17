@@ -80,7 +80,7 @@ $result_services = mysqli_query($con, $query_services);
                             echo "<tr>";
                             echo "<td>{$row['id']}</td>";
                             echo "<td>{$row['profession_name']}</td>";
-                            echo "<td>{$row['description']}</td>"; 
+                            echo "<td>" . implode(' ', array_slice(str_word_count($row['description'], 1), 0, 10)) . "...</td>"; 
                             echo "<td><img src='{$row['image']}' style='max-width: 100px; max-height: 100px;' alt='Service Image'></td>";
                             echo "<td>{$row['cat_name']}</td>"; 
                             echo "<td>{$row['sub_cat_name']}</td>"; 
