@@ -2,8 +2,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
 <?php
-session_start(); 
+session_start();
 
+// Check if user is not logged in, redirect to sign-in page
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: index.php");
+    exit();
+}
+?>
+
+<?php
 include '../config/dbcon.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

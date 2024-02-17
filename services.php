@@ -22,70 +22,30 @@ $result = mysqli_query($con, $query);
    
     <!-- Breadcrumb area start --> 
     <div class="breadcrumb__area theme-bg-1 p-relative pt-160 pb-160">
-    <div class="breadcrumb__thumb" data-background="assets/imgs/resources/page-title-bg-1.jpg"></div>
-    <div class="breadcrumb__thumb_3" data-background="assets/imgs/shapes/shape-53.png"></div>
-    <div class="small-container">
-        <div class="row justify-content-center">
-            <div class="col-xxl-12">
-                <div class="breadcrumb__wrapper p-relative">
-                <h2 class="breadcrumb__title">Services</h2>
-                <div class="breadcrumb__menu">
-                    <nav>
-                        <ul>
-                            <li><span><a href="category.php">Category</a></span></li>
-                            <li><span>Services</span></li>
-                        </ul>
-                    </nav>
-                </div>
+        <div class="breadcrumb__thumb" data-background="assets/imgs/resources/page-title-bg-1.jpg"></div>
+        <div class="breadcrumb__thumb_3" data-background="assets/imgs/shapes/shape-53.png"></div>
+        <div class="small-container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__wrapper p-relative">
+                    <h2 class="breadcrumb__title">Services</h2>
+                    <div class="breadcrumb__menu">
+                        <nav>
+                            <ul>
+                                <li><span><a href="category.php">Category</a></span></li>
+                                <li><span>Services</span></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    <!-- Breadcrumb area end --> 
-
-    <!-- <div class="col-xxl-4 col-xl-4 col-lg-4">
-        <div class="blog-sidebar">
-            <aside>
-                <div class="blog-widget-1 mb-30">
-                    <h5 class="blog-widget-title p-relative mb-45">Search</h5>
-                    <div class="search-form p-relative">
-                    <form action="#">
-                        <input type="text" placeholder="Search here">
-                        <button type="submit"><i class="icon-search"></i></button>
-                    </form>
-                    </div>
-                </div>
-            </aside>
-        </div>
-    </div> -->
 
     <!-- Service Slider area start --> 
     <section class="project-page-section section-space p-relative fix">
         <div class="small-container">
-            <h5 class="blog-widget-title p-relative mb-45">Search</h5>
-            <div class="row">
-                <div class="col-xxl-6 col-xl-6 col-lg-6 mb-15">
-                    <div class="blog-widget-1 mb-30">
-                        <div class="search-form p-relative">
-                        <form action="#">
-                            <input type="text" placeholder="Search here">
-                            <button type="submit"><i class="icon-search"></i></button>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6 col-lg-6 mb-15">
-                    <div class="blog-widget-1 mb-30">
-                        <div class="search-form p-relative">
-                        <form action="#">
-                            <input type="text" placeholder="Search here">
-                            <button type="submit"><i class="icon-search"></i></button>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row g-4">
                 <?php
                     // Check if query execution is successful 

@@ -3,6 +3,15 @@
 
 <?php
 session_start();
+
+// Check if user is not logged in, redirect to sign-in page
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: index.php");
+    exit();
+}
+?>
+
+<?php
 include '../config/dbcon.php';
 
 // Fetch categories from the database
