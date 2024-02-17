@@ -61,6 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group mt-5">
                         <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
                     </div>
+                    <div class="form-group mt-5">
+                      <button type="submit" class="form-control btn btn-primary submit px-3" onclick="redirectToHomePage()">Home Page</button>
+                    </div>
                 </form>
             </div>
         </div>
