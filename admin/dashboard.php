@@ -8,6 +8,36 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: index.php");
     exit();
 }
+
+// Include database connection
+include '../config/dbcon.php';
+
+// Fetch counts from database
+$service_count_query = "SELECT COUNT(*) as count FROM service";
+$professional_count_query = "SELECT COUNT(*) as count FROM professional";
+$customer_count_query = "SELECT COUNT(*) as count FROM customer";
+
+$service_count_result = mysqli_query($con, $service_count_query);
+$professional_count_result = mysqli_query($con, $professional_count_query);
+$customer_count_result = mysqli_query($con, $customer_count_query);
+
+// Check if query execution was successful
+if ($service_count_result && $professional_count_result && $customer_count_result) {
+    $service_count_row = mysqli_fetch_assoc($service_count_result);
+    $professional_count_row = mysqli_fetch_assoc($professional_count_result);
+    $customer_count_row = mysqli_fetch_assoc($customer_count_result);
+
+    // Get counts
+    $service_count = $service_count_row['count'];
+    $professional_count = $professional_count_row['count'];
+    $customer_count = $customer_count_row['count'];
+} else {
+    // Handle error if query execution fails
+    echo "Error: " . mysqli_error($con);
+}
+
+// Close connection
+mysqli_close($con);
 ?>
 
 <?php include('partials/header.php'); ?>
@@ -45,14 +75,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3><?php echo $service_count; ?></h3>
 
-                <p>New Orders</p>
+                <p>Services</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="service.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -60,14 +90,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3><?php echo $professional_count; ?></h3>
 
-                <p>Bounce Rate</p>
+                <p>Professionals</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="professional.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -75,14 +105,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3><?php echo $customer_count; ?></h3>
 
-                <p>User Registrations</p>
+                <p>Customers</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="customer.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -97,7 +127,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
