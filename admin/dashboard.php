@@ -16,21 +16,25 @@ include '../config/dbcon.php';
 $service_count_query = "SELECT COUNT(*) as count FROM service";
 $professional_count_query = "SELECT COUNT(*) as count FROM professional";
 $customer_count_query = "SELECT COUNT(*) as count FROM customer";
+$message_count_query = "SELECT COUNT(*) as count FROM contact";
 
 $service_count_result = mysqli_query($con, $service_count_query);
 $professional_count_result = mysqli_query($con, $professional_count_query);
 $customer_count_result = mysqli_query($con, $customer_count_query);
+$message_count_result = mysqli_query($con, $message_count_query);
 
 // Check if query execution was successful
-if ($service_count_result && $professional_count_result && $customer_count_result) {
+if ($service_count_result && $professional_count_result && $customer_count_result && $message_count_result) {
     $service_count_row = mysqli_fetch_assoc($service_count_result);
     $professional_count_row = mysqli_fetch_assoc($professional_count_result);
     $customer_count_row = mysqli_fetch_assoc($customer_count_result);
+    $message_count_row = mysqli_fetch_assoc($message_count_result);
 
     // Get counts
     $service_count = $service_count_row['count'];
     $professional_count = $professional_count_row['count'];
     $customer_count = $customer_count_row['count'];
+    $message_count = $message_count_row['count'];
 } else {
     // Handle error if query execution fails
     echo "Error: " . mysqli_error($con);
@@ -100,7 +104,6 @@ mysqli_close($con);
               <a href="professional.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
@@ -120,13 +123,14 @@ mysqli_close($con);
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3><?php echo $message_count; ?></h3>
 
-                <p>Unique Visitors</p>
+                <p>Messages</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
+              <a href="message.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

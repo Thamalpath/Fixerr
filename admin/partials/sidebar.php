@@ -83,6 +83,14 @@
                   <p>Service</p>
               </a>
           </li>
+          <br>
+          <!-- Message Option -->
+          <li class="nav-item">
+              <a href="./message.php" class="nav-link">
+                  <i class="nav-icon fas fa-envelope"></i>
+                  <p>Message</p>
+              </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
