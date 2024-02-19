@@ -92,7 +92,7 @@
          </div>
          <div class="col-xxl-5 col-xl-5 col-lg-5">
             <figure class="w-img pt-15">
-               <img src="assets/imgs/resources/faq-2.jpg" alt="">
+               <img src="assets/imgs/resources/faq.jpg" alt="FAQ Image" style="width: 464px; height: 600px;">
             </figure>
          </div>
       </div>
