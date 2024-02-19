@@ -66,33 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="row">
                 <div class="col-xxl-4 col-xl-4 col-lg-4">
                     <div class="contact-p-info-area">
-                    <div class="contact-box mb-30">
-                        <div class="icon-1">
-                            <i class="fat fa-location-dot"></i>
+                        <div class="contact-box">
+                            <div class="icon-1">
+                                <i class="fat fa-envelope"></i>
+                            </div>
+                            <div class="info">
+                                <span>Make A quote</span>
+                                <h4><a>info@fixerr.com</a></h4>
+                            </div>
                         </div>
-                        <div class="info">
-                            <span>Location</span>
-                            <h4>4140 Parker. USA </h4>
-                        </div>
-                    </div>
-                    <div class="contact-box mb-30">
-                        <div class="icon-1">
-                            <i class="fat fa-phone-volume"></i>
-                        </div>
-                        <div class="info">
-                            <span>Call Us 7/24</span>
-                            <h4><a href="tel:2085550112">+208-555-0112</a></h4>
-                        </div>
-                    </div>
-                    <div class="contact-box">
-                        <div class="icon-1">
-                            <i class="fat fa-envelope"></i>
-                        </div>
-                        <div class="info">
-                            <span>Make A quote</span>
-                            <h4><a href="mailto:Info@fixer.com">Info@fixerr.com</a></h4>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 <div class="col-xxl-8 col-xl-8 col-lg-8">

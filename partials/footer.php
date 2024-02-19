@@ -18,20 +18,12 @@ $result = mysqli_query($con, $query);
                   <div class="row g-4">
                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
                         <div class="footer-widget-1">
-                           <figure class="image" style="width: 50%">
+                           <figure class="image" style="width: 90%">
                               <img src="assets/imgs/logo/logo.png" alt>
                            </figure>
-                           <p class="mt-40 mb-30">
+                           <p class="mb-30">
                            Fixerr can serve as your one-stop solution for the majority of problems that arise in your house. 
                            </p>
-                           <div class="working-hours">
-                              <h6 class="text-white mb-20">Working Hours:</h6>
-                              <ul class="text-white">
-                                 <li>Mon - Sat: <span class="fw-lighter">10.00AM
-                                       - 4.00PM</span></li>
-                                 <li>Sunday: <span class="fw-lighter">Close</span></li>
-                              </ul>
-                           </div>
                         </div>
                      </div>
                      <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">

@@ -13,7 +13,7 @@
                               <div class="header-logo">
                                  <a href="index.php">
                                     <img src="assets/imgs/logo/logo.png"
-                                       alt="header logo" style="width: 70%;">
+                                       alt="header logo">
                                  </a>
                               </div>
                            </div>
@@ -89,7 +89,7 @@
                               <div class="header-logo">
                                  <a href="index.php">
                                     <img src="assets/imgs/logo/logo.png"
-                                       alt="header logo" style="width: 70%;">
+                                       alt="header logo">
                                  </a>
                               </div>
                            </div>
@@ -170,7 +170,7 @@
                      <div class="header-logo">
                         <a href="index.php">
                            <img src="assets/imgs/logo/logo.png"
-                              alt="header logo" style="width: 70%;">
+                              alt="header logo">
                         </a>
                      </div>
                   </div>
