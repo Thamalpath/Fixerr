@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 include '../config/dbcon.php';
 
 // Fetch unique service data from the database
-$sql = "SELECT DISTINCT service.id, service.profession_name, service.description, service.image, service.status, professional.fname, professional.lname, category.cat_name, sub_category.sub_cat_name
+$sql = "SELECT DISTINCT service.id, service.profession_name, service.description, service.image, service.price, service.status, professional.fname, professional.lname, category.cat_name, sub_category.sub_cat_name
         FROM service service
         LEFT JOIN professional professional ON service.professional_id = professional.id
         LEFT JOIN category category ON service.category_id = category.id
@@ -77,6 +77,7 @@ mysqli_close($con);
                     <th>Profession Name</th>
                     <th>Description</th>
                     <th>Image</th>
+                    <th>Price</th>
                     <th>Professional</th>
                     <th>Category</th>
                     <th>Sub-Category</th>
@@ -95,6 +96,7 @@ mysqli_close($con);
                             echo "<td>{$row['profession_name']}</td>";
                             echo "<td>" . implode(' ', array_slice(str_word_count($row['description'], 1), 0, 10)) . "...</td>"; 
                             echo "<td><img src='../{$row['image']}' style='max-width: 100px; max-height: 100px;' alt='Service Image'></td>";
+                            echo "<td>$ {$row['price']}</td>";
                             echo "<td>{$row['fname']} {$row['lname']}</td>"; 
                             echo "<td>{$row['cat_name']}</td>"; 
                             echo "<td>{$row['sub_cat_name']}</td>"; 

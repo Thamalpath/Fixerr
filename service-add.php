@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate and sanitize form data
     $profession_name = mysqli_real_escape_string($con, $_POST['profession_name']);
     $description = mysqli_real_escape_string($con, $_POST['description']);
+    $price = mysqli_real_escape_string($con, $_POST['price']);
     $professional_id = $_SESSION['user_data']['id'];
     $category_id = $_POST['category'];
     $sub_category_id = $_POST['subcategory'];
@@ -42,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $upload_path = "uploads/service/" . $image;
     if (move_uploaded_file($image_tmp, $upload_path)) {
         // Insert data into database
-        $query = "INSERT INTO service (profession_name, description, image, professional_id, category_id, sub_category_id) VALUES ('$profession_name', '$description', '$upload_path', '$professional_id', '$category_id', '$sub_category_id')";
+        $query = "INSERT INTO service (profession_name, description, image, price, professional_id, category_id, sub_category_id) VALUES ('$profession_name', '$description', '$upload_path', '$price', '$professional_id', '$category_id', '$sub_category_id')";
         $result = mysqli_query($con, $query);
         if ($result) {
             $_SESSION['success'] = "Service added successfully.";
@@ -115,6 +116,10 @@ mysqli_close($con);
                                 <label>Image</label>
                                 <input class="form-control" type="file" id="image" name="image" required onchange="previewImage()">
                                 <img id="imagePreview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;">
+                            </div>
+                            <div class="col-lg-12 mb-40">
+                                <label>Price (USD)</label>
+                                <input type="number" placeholder="Price" name="price" required>
                             </div>
                             <div class="col-lg-6">
                                 <label>Category</label>
