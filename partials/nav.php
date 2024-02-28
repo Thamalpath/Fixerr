@@ -29,6 +29,9 @@
                                              <a href="inbox.php">Inbox</a>
                                           </li>
                                           <li>
+                                             <a href="orders.php">Orders</a>
+                                          </li>
+                                          <li>
                                              <a href="category.php">Category</a>
                                           </li>
                                           <li class="has-dropdown active">
@@ -103,6 +106,9 @@
                                           </li>
                                           <li>
                                              <a href="inbox.php">Inbox</a>
+                                          </li>
+                                          <li>
+                                             <a href="pro-orders.php">Orders</a>
                                           </li>
                                           <li>
                                              <a>Services</a>
@@ -215,6 +221,16 @@
                            <a class="primary-btn-1 btn-hover"
                               href="signin.php">
                               SIGN IN &nbsp; | <i
+                                 class="icon-right-arrow"></i>
+                              <span style="top: 147.172px; left: 108.5px;"></span>
+                           </a>
+                        </div>
+                     </div>
+                     <div class="header-action d-none d-xl-inline-flex gap-5">
+                        <div class="header-link">
+                           <a class="primary-btn-1 btn-hover"
+                              href="signup.php">
+                              SIGN UP &nbsp; | <i
                                  class="icon-right-arrow"></i>
                               <span style="top: 147.172px; left: 108.5px;"></span>
                            </a>

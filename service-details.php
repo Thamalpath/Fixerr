@@ -18,10 +18,10 @@ $category = "SELECT `id`, `cat_name` FROM `category` WHERE `status` = 1";
 $result1 = mysqli_query($con, $category);
 
 // Get service ID from URL parameter
-$service_id = $_GET['id'];
+$service_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Retrieve service details for the given service
-$serviceQuery = "SELECT `id`, `profession_name`, `description`, `image` 
+$serviceQuery = "SELECT `id`, `profession_name`, `description`, `image`
           FROM `service` 
           WHERE `id` = $service_id AND `status` = 1";
 $serviceResult = mysqli_query($con, $serviceQuery);
@@ -35,6 +35,7 @@ $reviewQuery = "SELECT r.`message`, r.`rate`, r.`datetime`, c.`fname`, c.`lname`
                 LIMIT 8";
 $reviewResult = mysqli_query($con, $reviewQuery);
 
+// Handle the review submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_POST['rate']) && isset($_POST['service_id'])) {
     // Sanitize and validate form data
     $message = mysqli_real_escape_string($con, $_POST['message']);
@@ -60,6 +61,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
     header("Location: service-details.php?id=$service_id");
     exit();
 }
+
+// Handle the order submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) && $service_id > 0) {
+    $orderDescription = mysqli_real_escape_string($con, $_POST['orderDescription']);
+    $customer_id = $_SESSION['user_data']['id'];
+    
+    // Insert data into the order table
+    $orderQuery = "INSERT INTO `order` (`date`, `time`, `description`, `customer_id`, `service_id`) 
+                   VALUES (CURDATE(), CURTIME(), '$orderDescription', '$customer_id', '$service_id')";
+    
+    $orderResult = mysqli_query($con, $orderQuery);
+    
+    if ($orderResult) {
+      $_SESSION['success'] = "Order placed successfully.";
+    } else {
+      $_SESSION['error'] = "Failed to place the order. Please try again.";
+    }
+  }
 ?>
 
 
@@ -120,32 +139,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
         border-radius: 5px;
         margin-left: 5px;
     }
+
+    .pay-btn{
+        height: 80px;
+        font-size: 20px;
+    }
 </style>
 
+<!-- Bootstrap Modal for Order -->
+<div class="modal fade" id="makeOrderModal" tabindex="-1" aria-labelledby="makeOrderModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="makeOrderModalLabel">Make an Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?php
+            // Fetch professional's first and last name based on service ID
+            $professionalQuery = "SELECT p.`fname`, p.`lname` 
+                                FROM `service` s
+                                INNER JOIN `professional` p ON s.`professional_id` = p.`id`
+                                WHERE s.`id` = $service_id";
+            $professionalResult = mysqli_query($con, $professionalQuery);
+            $professionalRow = mysqli_fetch_assoc($professionalResult);
+            $professionalName = $professionalRow ? $professionalRow['fname'] . ' ' . $professionalRow['lname'] : 'Professional Not Found';
+        ?>
+        <label for="orderDescription" class="form-label fw-bold">Professional:</label> <h7> <?php echo $professionalName; ?></h7>
+        <form method="post" action="service-details.php?id=<?php echo $service_id; ?>">
+          <div class="mb-3">
+            <label for="orderDescription" class="form-label fw-bold">Description:</label>
+            <textarea class="form-control" id="orderDescription" name="orderDescription" style="height: 200px; font-size: 16px;" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <input type="hidden" name="service_id" value="<?php echo $service_id; ?>">
+            <button type="submit" class="primary-btn-4 btn-hover"> 
+                Submit Order<span style="top: 147.172px; left: 108.5px;"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <main>
    
     <!-- Breadcrumb area start --> 
     <div class="breadcrumb__area theme-bg-1 p-relative pt-160 pb-160">
-    <div class="breadcrumb__thumb" data-background="assets/imgs/resources/page-title-bg-1.jpg"></div>
-    <div class="breadcrumb__thumb_3" data-background="assets/imgs/shapes/shape-53.png"></div>
-    <div class="small-container">
-        <div class="row justify-content-center">
-            <div class="col-xxl-12">
-                <div class="breadcrumb__wrapper p-relative">
-                <h2 class="breadcrumb__title">Service Details</h2>
-                <div class="breadcrumb__menu">
-                    <nav>
-                        <ul>
-                            <li><span><a href="category.php">Category</a></span></li>
-                            <li><span>Service Details</span></li>
-                        </ul>
-                    </nav>
-                </div>
+        <div class="breadcrumb__thumb" data-background="assets/imgs/resources/page-title-bg-1.jpg"></div>
+        <div class="breadcrumb__thumb_3" data-background="assets/imgs/shapes/shape-53.png"></div>
+        <div class="small-container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__wrapper p-relative">
+                    <h2 class="breadcrumb__title">Service Details</h2>
+                    <div class="breadcrumb__menu">
+                        <nav>
+                            <ul>
+                                <li><span><a href="category.php">Category</a></span></li>
+                                <li><span>Service Details</span></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- Breadcrumb area end --> 
 
@@ -180,7 +240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
                         ?>
                         <br>
 
-                        <h4 class="post-box-comments-title">Customer Reviews</h4>
+                        <h4 class="post-box-comments-title mt-100">Customer Reviews</h4>
                         <?php while ($row = mysqli_fetch_assoc($reviewResult)) { ?>
                             <div class="post-box-comments-box p-relative mt-40 mb-40">
                                 <div class="postbox__comment-text">
@@ -255,7 +315,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
                                         // Output each category
                                         while ($row = mysqli_fetch_assoc($result1)) {
                                             echo '<li>';
-                                            echo '<a class="active">';
+                                            echo '<a href="sub-category.php?category_id=' . $row['id'] . '" class="active">';
                                             echo '<span>' . $row['cat_name'] . '</span>';
                                             echo '<span><i class="icon-arrow-right-double"></i></span>';
                                             echo '</a>';
@@ -280,6 +340,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
                                     </form>
                                 </div>
                             <?php endif; ?>
+
+                            <div class="row">
+                                <div class="col-lg-12 form-group text-center mt-50">
+                                    <button type="button" class="primary-btn-4 pay-btn btn-hover w-100" data-bs-toggle="modal" data-bs-target="#makeOrderModal"> 
+                                        Make an Order<span style="top: 147.172px; left: 108.5px;"></span>
+                                    </button>
+                                </div>
+                            </div>
                         </aside>
                     </div>
                 </div>
