@@ -16,7 +16,7 @@ $result = mysqli_query($con, $query);
             <div class="footer-top section-space-medium">
                <div class="small-container">
                   <div class="row g-4">
-                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+                     <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
                         <div class="footer-widget-1">
                            <figure class="image" style="width: 90%">
                               <img src="assets/imgs/logo/logo.png" alt>
@@ -25,8 +25,8 @@ $result = mysqli_query($con, $query);
                            Fixerr can serve as your one-stop solution for the majority of problems that arise in your house. 
                            </p>
                         </div>
-                     </div>
-                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+                     </div> -->
+                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
                         <div class="footer-widget-2 pl-50">
                            <h4 class="mb-30 footer-title">Quick Links</h4>
                            <ul class="service-list">
@@ -38,7 +38,7 @@ $result = mysqli_query($con, $query);
                            </ul>
                         </div>
                      </div>
-                     <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
+                     <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
                         <div class="footer-widget-2 pl-50">
                            <h4 class="mb-30 footer-title">Our Categories</h4>
                            <ul class="service-list">
@@ -62,7 +62,7 @@ $result = mysqli_query($con, $query);
                            ?>
                            </ul>
                         </div>
-                     </div>
+                     </div> -->
                      <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6">
                         <div class="footer-widget-4 pr-30">
                            <h4 class="mb-20 footer-title mb-30">Our Gallery</h4>

@@ -1,6 +1,14 @@
 <?php
 
 session_start();
+
+// Check if the user is a professional
+if (!isset($_SESSION['user_data']) || $_SESSION['user_type'] !== 'customer') {
+    // Redirect to a different page or display an error message
+    header("Location: signin.php");
+    exit();
+}
+
 include 'config/dbcon.php';
 
 // Get category ID from URL parameter

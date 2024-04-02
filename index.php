@@ -16,23 +16,6 @@
                               data-wow-delay="1000ms">
                               <span class="p-relative banner-sub-title">SERVICES AT THE DOORSTEP</span>
                               <h1 class="banner-title">We Focus on Customer Satisfaction Every Time</h1>
-                              <div class="banner-btn-area-2">
-                                 <a class="primary-btn-1 btn-hover"
-                                    href="category.php">
-                                    VIEW SERVICES &nbsp; | <i
-                                       class="icon-right-arrow"></i>
-                                    <span style="top: 147.172px; left: 108.5px;"></span>
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="socials-area">
-                              <ul>
-                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                              </ul>
-                              <span>FOLLOW US</span>
                            </div>
                         </div>
                      </div>
@@ -61,23 +44,6 @@
                               data-wow-delay="3000ms">
                               <span class="p-relative banner-sub-title">SERVICES AT THE DOORSTEP</span>
                               <h1 class="banner-title">We Have the Best Solution for Every Household Problems</h1>
-                              <div class="banner-btn-area-2">
-                                 <a class="primary-btn-1 btn-hover"
-                                    href="category.php">
-                                    VIEW SERVICES &nbsp; | <i
-                                       class="icon-right-arrow"></i>
-                                    <span style="top: 147.172px; left: 108.5px;"></span>
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="socials-area">
-                              <ul>
-                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                              </ul>
-                              <span>FOLLOW US</span>
                            </div>
                         </div>
                      </div>
@@ -106,23 +72,6 @@
                               data-wow-delay="3000ms">
                               <span class="p-relative banner-sub-title">SERVICES AT THE DOORSTEP</span>
                               <h1 class="banner-title">Explore the Our Greatest Services by Categorized</h1>
-                              <div class="banner-btn-area-2">
-                                 <a class="primary-btn-1 btn-hover"
-                                    href="category.php">
-                                    VIEW SERVICES &nbsp; | <i
-                                       class="icon-right-arrow"></i>
-                                    <span style="top: 147.172px; left: 108.5px;"></span>
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="socials-area">
-                              <ul>
-                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                 <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                              </ul>
-                              <span>FOLLOW US</span>
                            </div>
                         </div>
                      </div>
@@ -448,8 +397,6 @@
             data-background="assets/imgs/bg/testimonial-bg.png">
             <div class="bg-shape-2"
                data-background="assets/imgs/shapes/shape-16.png"></div>
-            <div class="bg-shape-3"
-               data-background="assets/imgs/shapes/shape-17.png"></div>
             <div class="small-container">
                <div class="row">
                   <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">

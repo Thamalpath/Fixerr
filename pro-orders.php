@@ -25,10 +25,10 @@ $orderResult = mysqli_query($con, $orderQuery);
 <?php include('partials/header.php'); ?>
 
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Berlin+Sans+FB:wght@300;400;500;600;700;800&display=swap");
 
     .custom-table thead th {
-        font-family: "Roboto", sans-serif;
+        font-family: 'Berlin Sans FB', sans-serif;
         font-size: 18px;
         background-color: #102039;
         color: #ffffff; 

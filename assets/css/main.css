@@ -3,7 +3,7 @@
 /*----------------------------------------*/
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Berlin+Sans+FB:wght@300;400;500;600;700;800&display=swap'");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 .main-menu ul li.has-dropdown > a::after,
@@ -48,6 +48,7 @@ i[class^="flaticon-"],
 :root {
   --primary-font: "Inter", sans-serif;
   --secondary-font: "Roboto", sans-serif;
+  --third-font: "Berlin Sans FB", sans-serif;
 
   --theme-color: #ea1826;
   --theme-color-1: #102039;
@@ -71,7 +72,7 @@ html {
     Typography css start 
 ---------------------------------*/
 body {
-  font-family: var(--secondary-font);
+  font-family: var(--third-font);
   font-size: 16px;
   font-weight: normal;
   color: var(--theme-color-1);
@@ -84,7 +85,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   color: var(--theme-color-1);
   margin-top: 0px;
   line-height: 1.3;
@@ -858,7 +859,7 @@ figure {
 .section-sub-title {
   position: relative;
   color: var(--theme-color-2);
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -1803,51 +1804,8 @@ figure {
   background: var(--theme-color-1);
 }
 
-.header-top-contact-info span {
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  font-size: 14px;
-}
-
-.header-top-contact-info span a:hover {
-  color: var(--theme-color-1);
-}
-
-.header-top-contact-info {
-  display: inline-flex;
-  gap: 50px;
-}
-
-.header-top-contact-info span.email:before {
-  content: "\e90a";
-  font-family: "icomoon";
-  position: absolute;
-  top: 0;
-  left: -25px;
-}
-
-.header-top-contact-info span.time:before {
-  content: "\e92b";
-  font-family: "icomoon";
-  position: absolute;
-  top: 0;
-  left: -25px;
-}
-
-.header-top-socials {
-  color: #fff;
-  display: inline-flex;
-  gap: 20px;
-  font-size: 14px;
-}
-
-.header-top-socials span:hover > a {
-  color: var(--theme-color-1);
-}
-
 .header-style-two {
-  background: transparent;
+  background: #c7c8cc;
   position: absolute;
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
@@ -1869,7 +1827,7 @@ figure {
 .header-style-two .header-shopping-cart .cart-icon,
 .header-style-two .header-link-1 .content span,
 .header-style-two .header-link-1 .content h6 {
-  color: #fff;
+  color: var(--theme-color-2);
 }
 
 .header-style-two .main-menu ul li a {
@@ -1877,15 +1835,15 @@ figure {
 }
 
 .header-style-two .main-menu ul li.active > a {
-  color: var(--theme-color-2);
+  color: var(--theme-color-1);
 }
 
 .header-style-two .main-menu ul li:hover > a {
-  color: var(--theme-color-2);
+  color: var(--theme-color-1);
 }
 
 .header-style-two.sticky {
-  background: #151515;
+  background: #c7c8cc;
 }
 
 /* gramen css */
@@ -2078,7 +2036,7 @@ figure {
 
 .header-link-1 .content span {
   color: var(--theme-color-1);
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -2194,7 +2152,7 @@ figure {
 
 .primary-btn-3 {
   color: var(--theme-color-2);
-  font-family: var(--secondary-font);
+  font-family: var(--third-font);
   font-size: 14px;
   font-weight: 600;
   background-color: #fff;
@@ -2903,7 +2861,7 @@ p.banner-text {
 }
 
 .about-us-content-area .content p {
-  font-family: "Roboto";
+  font-family: "Berlin Sans FB", sans-serif;
 }
 
 .about-us-content-area .icon {
@@ -3035,7 +2993,7 @@ p.banner-text {
 }
 
 .about-us-image-area .icon-box p {
-  font-family: var(--secondary-font);
+  font-family: var(--third-font);
   color: #fff;
   position: relative;
 }
@@ -3235,7 +3193,7 @@ p.banner-text {
   justify-content: start;
   align-items: center;
   gap: 6px;
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -3943,8 +3901,8 @@ p.banner-text {
 /*----------------------------------------*/
 
 .banner-main-2 {
-  padding-top: 312px;
-  padding-bottom: 225px;
+  padding-top: 260px;
+  padding-bottom: 160px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -3976,41 +3934,6 @@ p.banner-text {
   font-weight: 400;
   color: #fff;
   text-transform: capitalize;
-}
-
-.banner-main-2 .socials-area {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-.banner-main-2 .socials-area li {
-  width: 36px;
-  height: 36px;
-  border: 1px solid #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  color: #fff;
-  transition: all 500ms ease;
-}
-
-.banner-main-2 .socials-area li:hover {
-  background: var(--theme-color-2);
-  border: 1px solid var(--theme-color-2);
-}
-
-.banner-main-2 .socials-area span {
-  color: #fff;
-  transform: rotate(-90deg);
-  display: block;
-  margin-top: 24px;
-  position: relative;
-  top: 24px;
-  right: 20px;
 }
 
 .banner-section-2 .shape-1 {
@@ -4257,7 +4180,7 @@ p.banner-text {
 
 .about-2-image-area .icon-box p {
   color: #fff;
-  font-family: "Roboto";
+  font-family: "Berlin Sans FB", sans-serif;
   margin: 0;
 }
 
@@ -4315,7 +4238,7 @@ p.banner-text {
 }
 
 .about-2-content-area .content span {
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -4445,7 +4368,7 @@ p.banner-text {
   box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.08);
   border-radius: 50%;
   font-size: 16px;
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4683,7 +4606,7 @@ p.banner-text {
 
 .icon-box-counter-area .text-1 {
   color: #787878;
-  font-family: var(--secondary-font);
+  font-family: var(--third-font);
 }
 
 /*----------------------------------------*/
@@ -5092,7 +5015,7 @@ p.banner-text {
 
 ul.about-3-list {
   margin-left: 10px;
-  font-family: var(--secondary-font);
+  font-family: var(--third-font);
   font-size: 14px;
   font-weight: 500;
 }
@@ -5363,7 +5286,7 @@ ul.about-3-list li:before {
   font-weight: 600;
   line-height: 26px;
   text-transform: uppercase;
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   background: #f8f8f8;
   padding: 12px 0;
   position: relative;
@@ -6307,7 +6230,7 @@ ul.postbox__comment_ratings {
 
 .postbox__comment-form label {
   font-weight: 500;
-  font-family: var(--primary-font);
+  font-family: var(--third-font);
   margin-bottom: 15px;
 }
 

@@ -2,23 +2,71 @@
 session_start();
 include 'config/dbcon.php';
 
-// Check if the user is logged in as a customer
-if(isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'customer') {
-    // User is logged in as a customer, show the chat widget
-    $showChatWidget = true;
-    $showComment = true;
-} else {
-    // User is not logged in as a customer, hide the chat widget
-    $showChatWidget = false;
-    $showComment = false;
+// Check if the user is logged in
+if (!isset($_SESSION['user_data'])) {
+    // Redirect to the signin page if not logged in
+    header("Location: signin.php");
+    exit();
 }
+
+// Check if the user is a customer or professional
+$user_type = $_SESSION['user_type'];
+
+// Set the appropriate variables to show or hide chat features based on user type
+$showChatWidget = ($user_type === 'customer');
+$showComment = ($user_type === 'customer'); 
+$showOrder = ($user_type === 'customer'); 
+
+// Initialize variables for sender's name and ID
+$sender_name = "";
+$sender_id = 0;
+
+// Get service ID from URL parameter
+$service_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($user_type === 'customer') {
+    // Get the service ID from the URL parameter
+    $service_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    
+    // Query to get the professional's name and ID based on the service ID
+    $senderQuery = "SELECT p.id, CONCAT(p.fname, ' ', p.lname) AS sender_name
+                    FROM professional p 
+                    INNER JOIN service s ON p.id = s.professional_id 
+                    WHERE s.id = $service_id";
+    $senderResult = mysqli_query($con, $senderQuery);
+
+    // Check if a row is returned
+    if ($senderResult && mysqli_num_rows($senderResult) > 0) {
+        $senderRow = mysqli_fetch_assoc($senderResult);
+        $sender_name = $senderRow['sender_name'];
+        $sender_id = $senderRow['id'];
+    }
+} 
+
+// Handle sending message
+if (isset($_POST['message'])) {
+    $message = $_POST['message'];
+    $receiver_id = $sender_id; // Receiver is the professional
+    $receiver_type = 'professional';
+    $sent_time = date('Y-m-d H:i:s');
+    
+    // Insert the message into the chat table
+    $insertQuery = "INSERT INTO chat (service_id, sender_id, sender_type, receiver_id, receiver_type, message, sent_time) 
+                    VALUES ($service_id, {$_SESSION['user_data']['id']}, '$user_type', $receiver_id, '$receiver_type', '$message', '$sent_time')";
+    mysqli_query($con, $insertQuery);
+}
+
+// Retrieve all messages related to the customer and professional users
+$messageQuery = "SELECT message, sent_time
+                 FROM chat
+                 WHERE (sender_id = {$_SESSION['user_data']['id']} AND sender_type = '$user_type' AND receiver_type = 'professional')
+                 OR (sender_type = 'professional' AND receiver_id = {$_SESSION['user_data']['id']} AND receiver_type = '$user_type')
+                 ORDER BY sent_time ASC"; // Order by ascending to show oldest messages first
+$messageResult = mysqli_query($con, $messageQuery);
 
 // Retrieve all categories
 $category = "SELECT `id`, `cat_name` FROM `category` WHERE `status` = 1";
 $result1 = mysqli_query($con, $category);
-
-// Get service ID from URL parameter
-$service_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // Retrieve service details for the given service
 $serviceQuery = "SELECT `id`, `profession_name`, `description`, `image`
@@ -85,9 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
 <?php include('partials/header.php'); ?>
 
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
-
-    @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Berlin+Sans+FB:wght@300;400;500;600;700;800&display=swap");
 
     /* Styles for chat area and form */
     .chat-area {
@@ -98,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
         height: 300px;
         width: auto;
         overflow-y: scroll;
-        font-family: "Roboto", sans-serif;
+        font-family: 'Berlin Sans FB', sans-serif;
         border-radius: 0 0 5px 5px;
         scrollbar-color: #102039 #ffffff;
     }
@@ -107,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
         background-color: #102039;
         color: #ffffff;
         padding: 10px;
-        font-family: "Roboto", sans-serif;
+        font-family: 'Berlin Sans FB', sans-serif;
         text-align: center;
         font-weight: bold;
         font-size: 20px;
@@ -140,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
         margin-left: 5px;
     }
 
-    .pay-btn{
+    .pay-btn .chat-btn{
         height: 80px;
         font-size: 20px;
     }
@@ -329,18 +375,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
                             </div>
 
                             <?php if($showChatWidget): ?>
-                                <div class="chat-widget-1 mb-30">
-                                    <div id="chatHeader" class="chat-header">Chat</div>
-                                    <div id="chatArea" class="chat-area">
-                                        <!-- Chat messages will be displayed here -->
-                                    </div>
-                                    <form id="chatForm" class="chat-form">
-                                        <input type="text" id="messageInput" placeholder="Type your message...">
-                                        <button type="submit">Send</button>
-                                    </form>
+                            <div class="chat-widget-1 mb-30">
+                                <div id="chatHeader" class="chat-header">Chat</div>
+                                <div id="chatArea" class="chat-area">
+                                <?php
+                                // Display messages
+                                if ($messageResult && mysqli_num_rows($messageResult) > 0) {
+                                    while ($row = mysqli_fetch_assoc($messageResult)) {
+                                        echo "<div class='message'>{$row['message']}</div>";
+                                    }
+                                }
+                                ?>
                                 </div>
+                                <form id="chatForm" class="chat-form" method="POST">
+                                    <input type="text" id="messageInput" name="message" placeholder="Type your message...">
+                                    <button type="submit">Send</button>
+                                </form>
+                            </div>
                             <?php endif; ?>
 
+                            <?php if($showChatWidget): ?>
+                            <div class="row">
+                                <div class="col-lg-12 form-group text-center mt-50">
+                                    <a href="inbox.php?id=<?php echo $service_id; ?>" type="button" class="primary-btn-4 chat-btn btn-hover w-100">
+                                        Send a Message<span style="top: 147.172px; left: 108.5px;"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if($showOrder): ?>
                             <div class="row">
                                 <div class="col-lg-12 form-group text-center mt-50">
                                     <button type="button" class="primary-btn-4 pay-btn btn-hover w-100" data-bs-toggle="modal" data-bs-target="#makeOrderModal"> 
@@ -348,6 +412,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
                                     </button>
                                 </div>
                             </div>
+                            <?php endif; ?>
                         </aside>
                     </div>
                 </div>
@@ -373,33 +438,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
 </script>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const chatArea = document.getElementById("chatArea");
-        const chatForm = document.getElementById("chatForm");
-
-        chatForm.addEventListener("submit", function(e) {
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        // Handle sender link click event
+        $(".sender-link").on("click", function(e) {
             e.preventDefault();
-            // Implement your logic to send the message
-            const message = document.getElementById("messageInput").value.trim();
-            if (message !== "") {
-                sendMessage(message);
-                displayMessage("You", message, "right");
-                document.getElementById("messageInput").value = "";
-            }
+            var senderId = $(this).data("sender-id");
+            
+            // Perform AJAX request to retrieve messages for the selected sender
+            $.ajax({
+                url: "retrieveMessages.php",
+                method: "POST",
+                data: { sender_id: senderId },
+                dataType: "html",
+                success: function(data) {
+                    $("#chatArea").html(data);
+                }
+            });
         });
 
-        function sendMessage(message) {
-            const sender = "Professional";
-            displayMessage(sender, message, "left");
-        }
+        // Handle form submission event
+        $("#chatForm").on("submit", function(e) {
+            e.preventDefault();
+            
+            // Get input values
+            var message = $("#messageInput").val();
+            var receiverId = $("#receiver_id").val();
+            var senderType = $("#sender_type").val();
+            var receiverId = $("#receiver_id").val(); // New
+            
+            // Perform AJAX request to send message
+            $.ajax({
+                url: "insertMessage.php",
+                method: "POST",
+                data: { message: message, receiver_id: receiverId, sender_type: senderType, receiver_id: receiverId }, // Updated
+                dataType: "text",
+                success: function(response) {
+                    // Handle success response
+                    $("#messageInput").val(""); // Clear input field after sending message
+                }
+            });
+        });
 
-        function displayMessage(sender, message, alignment) {
-            const messageDiv = document.createElement("div");
-            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
-            messageDiv.classList.add("message");
-            messageDiv.classList.add(alignment);
-            chatArea.appendChild(messageDiv);
-        }
+        // Refresh chat area at regular intervals
+        setInterval(function(){
+            // Perform AJAX request to retrieve real-time chat updates
+            $.ajax({
+                url: "realTimeChat.php",
+                method: "POST",
+                dataType: "html",
+                success: function(data) {
+                    $("#chatArea").html(data);
+                }
+            });
+        }, 700);
     });
-</script>
+</script> -->

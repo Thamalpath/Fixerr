@@ -22,19 +22,19 @@ $orderResult = mysqli_query($con, $orderQuery);
 
 ?>
 
-<?php include('partials/header.php'); ?>
-
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Berlin+Sans+FB:wght@300;400;500;600;700;800&display=swap");
 
     .custom-table thead th {
-        font-family: "Roboto", sans-serif;
+        font-family: 'Berlin Sans FB', sans-serif;
         font-size: 18px;
         background-color: #102039;
         color: #ffffff; 
         height: 50px;
     }
 </style>
+
+<?php include('partials/header.php'); ?>
 
 <main>
    
@@ -95,7 +95,11 @@ $orderResult = mysqli_query($con, $orderQuery);
                                         echo "<td>{$row['date']} {$row['time']}</td>"; 
                                         echo "<td>{$row['service_name']}</td>"; 
                                         echo "<td class='align-middle'><div class='d-flex justify-content-center align-items-center'>"; 
-                                        echo "<a href='payment.php?id={$row['id']}' class='primary-btn-4 pay-btn btn-hover w-75'>Pay $ {$row['price']} <span style='top: 147.172px; left: 108.5px;'></span>  </a>"; 
+                                            $service_id = $row['id']; 
+                                            $service_name = urlencode($row['service_name']);
+                                            $price = urlencode($row['price']);
+                                            $currency = urlencode($_SESSION['currency'] = "USD");
+                                            echo "<a href='pay.php?order_id={$row['id']}&service_id=$service_id&service_name=$service_name&price=$price&currency=$currency' class='primary-btn-4 pay-btn btn-hover w-75'>Pay $ {$row['price']} <span style='top: 147.172px; left: 108.5px;'></span> </a>";
                                         echo "</div></td>";
                                         echo "</tr>";
                                     }
