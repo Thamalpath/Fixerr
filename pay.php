@@ -19,6 +19,7 @@ $currency = isset($_GET['currency']) ? $_GET['currency'] : '';
 $_SESSION['service_name'] = $service_name;
 $_SESSION['price'] = $price;
 $_SESSION['currency'] = $currency;
+$_SESSION['order_id'] = $order_id;
 
 ?>
 
@@ -29,6 +30,9 @@ $_SESSION['currency'] = $currency;
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Payment Gateway</title>
+
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/logo/logo.png">
 
         <!-- Stripe JS library -->
         <script src="https://js.stripe.com/v3/"></script>

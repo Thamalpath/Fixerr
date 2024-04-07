@@ -10,7 +10,7 @@ include_once 'config/dbcon.php';
  
 // Include the Stripe PHP library 
 require_once 'stripe-php/init.php'; 
- 
+
 // Set API key 
 \Stripe\Stripe::setApiKey(STRIPE_API_KEY); 
  
@@ -39,7 +39,7 @@ if($jsonObj->request_type == 'create_payment_intent'){
      
         $output = [ 
             'id' => $paymentIntent->id, 
-            'clientSecret' => $paymentIntent->client_secret 
+            'clientSecret' => $paymentIntent->client_secret   
         ]; 
      
         echo json_encode($output); 
@@ -114,16 +114,17 @@ if($jsonObj->request_type == 'create_payment_intent'){
         $stmt->execute(); 
         $stmt->bind_result($row_id); 
         $stmt->fetch(); 
-         
+
         $payment_id = 0; 
         if(!empty($row_id)){ 
             $payment_id = $row_id; 
         }else{ 
             // Insert transaction data into the database 
-            $sqlQ = "INSERT INTO transactions (customer_name,customer_email,item_name,item_price,item_price_currency,paid_amount,paid_amount_currency,txn_id,payment_status,created,modified) VALUES (?,?,?,?,?,?,?,?,?,NOW(),NOW())"; 
-            $stmt = $con->prepare($sqlQ); 
-            $stmt->bind_param("sssdsdsss", $customer_name, $customer_email, $itemName, $itemPrice, $currency, $paid_amount, $paid_currency, $transaction_id, $payment_status); 
-            $insert = $stmt->execute(); 
+            $sqlQ = "INSERT INTO transactions (customer_name,customer_email,item_name,item_price,item_price_currency,paid_amount,paid_amount_currency,txn_id,payment_status,created,modified,order_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"; 
+            $stmt = $con->prepare($sqlQ);
+            $date = date("Y-m-d H:i:s");
+            $stmt->bind_param("sssdsdsssssi", $customer_name, $customer_email, $_SESSION['service_name'], $_SESSION['price'], $_SESSION['currency'], $paid_amount, $paid_currency, $transaction_id, $payment_status,$date,$date, $_SESSION['order_id']); 
+            $insert = $stmt->execute();
              
             if($insert){ 
                 $payment_id = $stmt->insert_id; 

@@ -38,13 +38,6 @@ if (preg_match($phone_regex, $message)) {
     // Execute query 
     mysqli_query($con, $insert_query);
 }
-
-// Return success response or error message
-if (isset($_SESSION['error'])) {
-    echo $_SESSION['error'];
-} else {
-    echo "Message inserted";
-}
 ?>
 
 <!-- Include Notyf JS Library -->
