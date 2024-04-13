@@ -9,13 +9,10 @@ if (!isset($_SESSION['user_data'])) {
     exit();
 }
 
+// ====================================== SEND MESSAGE ======================================
+
 // Check if the user is a customer or professional
 $user_type = $_SESSION['user_type'];
-
-// Set the appropriate variables to show or hide chat features based on user type
-$showChatWidget = ($user_type === 'customer');
-$showComment = ($user_type === 'customer'); 
-$showOrder = ($user_type === 'customer'); 
 
 // Initialize variables for sender's name and ID
 $sender_name = "";
@@ -48,25 +45,33 @@ if (isset($_POST['message'])) {
     $message = $_POST['message'];
     $receiver_id = $sender_id; // Receiver is the professional
     $receiver_type = 'professional';
-    $sent_time = date('Y-m-d H:i:s');
     
     // Insert the message into the chat table
     $insertQuery = "INSERT INTO chat (service_id, sender_id, sender_type, receiver_id, receiver_type, message, sent_time) 
-                    VALUES ($service_id, {$_SESSION['user_data']['id']}, '$user_type', $receiver_id, '$receiver_type', '$message', '$sent_time')";
+                    VALUES ($service_id, {$_SESSION['user_data']['id']}, '$user_type', $receiver_id, '$receiver_type', '$message', NOW())";
     mysqli_query($con, $insertQuery);
 }
 
-// Retrieve all messages related to the customer and professional users
-$messageQuery = "SELECT message, sent_time
-                 FROM chat
-                 WHERE (sender_id = {$_SESSION['user_data']['id']} AND sender_type = '$user_type' AND receiver_type = 'professional')
-                 OR (sender_type = 'professional' AND receiver_id = {$_SESSION['user_data']['id']} AND receiver_type = '$user_type')
-                 ORDER BY sent_time ASC"; // Order by ascending to show oldest messages first
-$messageResult = mysqli_query($con, $messageQuery);
+
+// =================================== RETRIEVE MESSAGE =====================================
+
+// Retrieve chat messages between the signed-in customer user and the professional user
+$chatQuery = "SELECT c.id, c.sender_id, c.sender_type, c.receiver_id, c.receiver_type, c.message, c.sent_time
+              FROM chat c
+              WHERE ((c.sender_id = {$_SESSION['user_data']['id']} AND c.receiver_id = $sender_id AND c.sender_type = 'customer')
+                 OR (c.sender_id = $sender_id AND c.receiver_id = {$_SESSION['user_data']['id']} AND c.sender_type = 'professional'))
+              ORDER BY c.sent_time ASC";
+$chatResult = mysqli_query($con, $chatQuery);
+
+
+// ==================================== RETRIEVE CATEGORY ====================================
 
 // Retrieve all categories
 $category = "SELECT `id`, `cat_name` FROM `category` WHERE `status` = 1";
 $result1 = mysqli_query($con, $category);
+
+
+// ================================== RETRIEVE SERVICE DATA ==================================
 
 // Retrieve service details for the given service
 $serviceQuery = "SELECT `id`, `profession_name`, `description`, `image`
@@ -189,6 +194,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
     .pay-btn .chat-btn{
         height: 80px;
         font-size: 20px;
+    }
+
+    .sent-by-me {
+        text-align: right;
+    }
+
+    .sent-by-other {
+        text-align: left;
     }
 </style>
 
@@ -315,38 +328,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
                             <hr>
                         <?php } ?>
                         
-                        <?php if($showComment): ?>
-                            <div class="postbox__comment-form mt-60">
-                                <h4 class="postbox__comment-form-title mb-50">Leave a Comment</h4>
-                                <form method="post" action="#">
-                                    <input type="hidden" name="service_id" value="<?php echo $service_id; ?>">
-                                    <div class="row">
-                                        <div class="col-xxl-12">
-                                            <div class="postbox__comment-input">
-                                                <label>Star Rating</label>
-                                                <!-- Include RateYo star rating plugin -->
-                                                <div id="rateYo"></div>
-                                                <input type="hidden" name="rate" id="ratingInput" value="0">
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-12 mt-40">
-                                            <div class="postbox__comment-input">
-                                                <label>Your Review</label>
-                                                <textarea name="message" placeholder="Write Message" required></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-12">
-                                            <div class="postbox__comment-btn">
-                                                <button type="submit" class="primary-btn-1 btn-hover">
-                                                    POST comment
-                                                    <span style="top: 147.172px; left: 108.5px;"></span>
-                                                </button>
-                                            </div>
+                        <div class="postbox__comment-form mt-60">
+                            <h4 class="postbox__comment-form-title mb-50">Leave a Comment</h4>
+                            <form method="post" action="#">
+                                <input type="hidden" name="service_id" value="<?php echo $service_id; ?>">
+                                <div class="row">
+                                    <div class="col-xxl-12">
+                                        <div class="postbox__comment-input">
+                                            <label>Star Rating</label>
+                                            <!-- Include RateYo star rating plugin -->
+                                            <div id="rateYo"></div>
+                                            <input type="hidden" name="rate" id="ratingInput" value="0">
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        <?php endif; ?>
+                                    <div class="col-xxl-12 mt-40">
+                                        <div class="postbox__comment-input">
+                                            <label>Your Review</label>
+                                            <textarea name="message" placeholder="Write Message" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-12">
+                                        <div class="postbox__comment-btn">
+                                            <button type="submit" class="primary-btn-1 btn-hover">
+                                                POST comment
+                                                <span style="top: 147.172px; left: 108.5px;"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xxl-5 col-xl-5 col-lg-5">
@@ -374,37 +385,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
                                 </ul>
                             </div>
 
-                            <?php if($showChatWidget): ?>
                             <div class="chat-widget-1 mb-30">
                                 <div id="chatHeader" class="chat-header">Chat</div>
                                 <div id="chatArea" class="chat-area">
-                                <?php
-                                // Display messages
-                                if ($messageResult && mysqli_num_rows($messageResult) > 0) {
-                                    while ($row = mysqli_fetch_assoc($messageResult)) {
-                                        echo "<div class='message'>{$row['message']}</div>";
+                                    <?php
+                                    // Display messages
+                                    if ($chatResult && mysqli_num_rows($chatResult) > 0) {
+                                        while ($chatRow = mysqli_fetch_assoc($chatResult)) {
+                                            $messageClass = ($chatRow['sender_type'] === 'customer') ? 'sent-by-me' : 'sent-by-other';
+                                            $messageSender = ($chatRow['sender_type'] === 'customer') ? 'Me' : $sender_name;
+                                    ?>
+                                            <div>
+                                                <p class="<?php echo $messageClass; ?>">
+                                                    <strong>
+                                                        <span style="color: <?php echo $messageClass === 'sent-by-me' ? '#102039' : '#FF9800'; ?>;">
+                                                            <?php echo $messageSender; ?>:
+                                                        </span>
+                                                    </strong>
+                                                    <?php echo $chatRow['message']; ?>
+                                                </p>
+                                            </div>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo "<div class='chat-message chat-message-empty'>No messages found.</div>";
                                     }
-                                }
-                                ?>
+                                    ?>
                                 </div>
                                 <form id="chatForm" class="chat-form" method="POST">
                                     <input type="text" id="messageInput" name="message" placeholder="Type your message...">
                                     <button type="submit">Send</button>
                                 </form>
                             </div>
-                            <?php endif; ?>
 
-                            <?php if($showChatWidget): ?>
-                            <div class="row">
-                                <div class="col-lg-12 form-group text-center mt-50">
-                                    <a href="inbox.php?id=<?php echo $service_id; ?>" type="button" class="primary-btn-4 chat-btn btn-hover w-100">
-                                        Send a Message<span style="top: 147.172px; left: 108.5px;"></span>
-                                    </a>
-                                </div>
-                            </div>
-                            <?php endif; ?>
-
-                            <?php if($showOrder): ?>
                             <div class="row">
                                 <div class="col-lg-12 form-group text-center mt-50">
                                     <button type="button" class="primary-btn-4 pay-btn btn-hover w-100" data-bs-toggle="modal" data-bs-target="#makeOrderModal"> 
@@ -412,7 +425,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
                                     </button>
                                 </div>
                             </div>
-                            <?php endif; ?>
                         </aside>
                     </div>
                 </div>
@@ -436,61 +448,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['orderDescription']) &&
         });
     });
 </script>
-
-
-<!-- <script type="text/javascript">
-    $(document).ready(function(){
-        // Handle sender link click event
-        $(".sender-link").on("click", function(e) {
-            e.preventDefault();
-            var senderId = $(this).data("sender-id");
-            
-            // Perform AJAX request to retrieve messages for the selected sender
-            $.ajax({
-                url: "retrieveMessages.php",
-                method: "POST",
-                data: { sender_id: senderId },
-                dataType: "html",
-                success: function(data) {
-                    $("#chatArea").html(data);
-                }
-            });
-        });
-
-        // Handle form submission event
-        $("#chatForm").on("submit", function(e) {
-            e.preventDefault();
-            
-            // Get input values
-            var message = $("#messageInput").val();
-            var receiverId = $("#receiver_id").val();
-            var senderType = $("#sender_type").val();
-            var receiverId = $("#receiver_id").val(); // New
-            
-            // Perform AJAX request to send message
-            $.ajax({
-                url: "insertMessage.php",
-                method: "POST",
-                data: { message: message, receiver_id: receiverId, sender_type: senderType, receiver_id: receiverId }, // Updated
-                dataType: "text",
-                success: function(response) {
-                    // Handle success response
-                    $("#messageInput").val(""); // Clear input field after sending message
-                }
-            });
-        });
-
-        // Refresh chat area at regular intervals
-        setInterval(function(){
-            // Perform AJAX request to retrieve real-time chat updates
-            $.ajax({
-                url: "realTimeChat.php",
-                method: "POST",
-                dataType: "html",
-                success: function(data) {
-                    $("#chatArea").html(data);
-                }
-            });
-        }, 700);
-    });
-</script> -->

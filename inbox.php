@@ -39,6 +39,7 @@ $receiver_type = "";
         padding: 20px;
         background: #fff;   
         border-radius: 8px;
+        font-size: 20px;
         font-weight: 500;
     }
 
@@ -66,11 +67,15 @@ $receiver_type = "";
         border: 1px solid #102039;
         background-color: #ffffff;
         padding: 20px;
-        height: 450px; /* Set a fixed height */
+        height: 450px; 
         width: auto;
         font-family: 'Berlin Sans FB', sans-serif;
         border-radius: 5px;
-        overflow-y: scroll; /* Change overflow property */
+        overflow-y: scroll;
+    }
+
+    .chat-area p{
+        font-size: 18px;
     }
 
     .chat-header {
@@ -292,20 +297,17 @@ $receiver_type = "";
 
         // Refresh chat area at regular intervals
         setInterval(function(){
-            var receiverId = $("#receiver_id").val();
-            var receiverType = $("#receiver_type").val();
-            var senderType = $("#sender_type").val();
-            
             // Perform AJAX request to retrieve real-time chat updates
             $.ajax({
                 url: "realTimeChat.php",
                 method: "POST",
-                data: { receiver_id: receiverId, receiver_type: receiverType, sender_type: senderType },
+                data: { receiver_id: $('#receiver_id').val() }, 
                 dataType: "html",
                 success: function(data) {
-                    $("#chatArea").html(data);
+                    $('#chatArea').html(data); 
                 }
             });
-        }, 700);
+        }, 3000); 
+
     });
 </script>
